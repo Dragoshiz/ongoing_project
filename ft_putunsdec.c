@@ -6,30 +6,31 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:00:20 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/17 15:10:57 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:45:31 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putunsdec(unsigned int u)
+int	ft_putunsdec(unsigned int n)
 {	
-	long	ln;
-	long	nn;
+	unsigned int	modulednum;
+	int				digits;
 
-	ln = (long)u;
-	if (ln < 0)
+	digits = ft_get_digits(n);
+	if (n < 0)
 	{
 		ft_putchar('-');
-		ln *= -1;
+		n *= -1;
 	}
-	if (ln >= 10)
+	if (n >= 10)
 	{
-		nn = ln % 10;
-		ln /= 10;
-		ft_putnbr(ln);
-		ft_putchar(nn + 48);
+		modulednum = n % 10;
+		n /= 10;
+		ft_putnbr(n);
+		ft_putchar(modulednum + 48);
+		return (digits);
 	}
-	ft_putchar(ln + 48);
-	return (ft_get_digits(u));
+	ft_putchar(n + 48);
+	return (digits);
 }

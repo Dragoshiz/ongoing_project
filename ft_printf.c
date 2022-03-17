@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:39:50 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/17 16:04:41 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:43:06 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ int	ft_printf(const char *arr, ...)
 	count = 0;
 	while (arr[i])
 	{
-		if (arr[i] != '%')
+		if (arr[i] == '%')
 		{
-			count += ft_get_specifier(arr[i + 1], ap);
-			i -= count;
+			i++;
+			count += ft_get_specifier(arr[i], ap);
+			i++;
 		}
-		count = ft_putchar(arr[i]);
+		count += ft_putchar(arr[i]);
 		i++;
 	}
 	va_end(ap);
@@ -74,6 +75,7 @@ int	ft_get_specifier(const char specifier, va_list ap)
 		count = ft_putpointer(va_arg(ap, void *));
 	if (specifier == 'd' || specifier == 'i')
 		count = ft_putnbr(va_arg(ap, int));
+	printf("%d", count);
 	if (specifier == 'u')
 		count = ft_putnbr(va_arg(ap, unsigned int));
 	if (specifier == 'x')
@@ -94,8 +96,10 @@ int main(void)
 	// ft_printf(hi, 20);
 	//  num = ft_putstr(hi);
 	// printf("++++++%d++++++", printf("%%X", 3000000));
-	printf("hello%d\n", 1234567);
-	ft_printf("%d", 1234567);
+	printf("original num%d", printf("%d", -100000));
+	// ft_printf("hello%d\n", 1234567);
+	printf("\n_____mynum%d____\n", ft_putnbr(-100000));
+	// ft_printf("hello%d\n", 1234567)
 	// printf("myyyy%x\n", ft_puthex_lo(3000000));
 	return (0);
 }
