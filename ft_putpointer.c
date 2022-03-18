@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:31:19 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/17 14:09:23 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/18 12:32:19 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	ft_putpointer(void *ptr)
 {
 	int	count;
-	int	remainder;
 
 	count = 0;
 	if (!ptr)

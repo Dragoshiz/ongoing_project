@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:45:50 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/17 17:43:38 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/18 14:51:28 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
+}
+
+int	ft_putstr(char *s)
+{
+	write(1, s, ft_strlen(s));
+	return (ft_strlen(s));
 }
 
 int	ft_get_digits(long n)
@@ -69,10 +75,4 @@ int	ft_putnbr(int n)
 	}
 	ft_putchar(n + 48);
 	return (digits);
-}
-
-int	ft_putstr(char *s)
-{
-	write(1, s, ft_strlen(s));
-	return (ft_strlen(s));
 }
