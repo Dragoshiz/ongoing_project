@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:39:50 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/18 15:11:41 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/18 18:16:00 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	ft_get_specifier(const char specifier, va_list ap)
 	else if (specifier == 'd' || specifier == 'i')
 		count = ft_putnbr(va_arg(ap, int));
 	else if (specifier == 'u')
-		count = ft_putnbr(va_arg(ap, unsigned int));
+		count = ft_putunsdec(va_arg(ap, unsigned int));
 	else if (specifier == 'x')
 		count = ft_puthex_lo(va_arg(ap, unsigned int));
 	else if (specifier == 'X')
@@ -79,9 +79,9 @@ int	ft_printf(const char *arr, ...)
 		{
 			i++;
 			count += ft_get_specifier(arr[i], ap);
-			i++;
 		}
-		count += ft_putchar(arr[i]);
+		else
+			count += ft_putchar(arr[i]);
 		i++;
 	}
 	va_end(ap);
@@ -100,7 +100,7 @@ int main(void)
 	// printf("original%d", printf("o-%c", 'a'));
 	// ft_printf("hello%d\n", 1234567);
 	// printf("\n_____my%d\n", ft_printf("m-%c", 'a'));
-	num = ft_printf("%c", 'a');
+	ft_printf("%xhekkkii%gfewaf,%d", 16,14);
 	// printf("num my ---%d\n", num);
 	// num = printf("%c", 'a');
 	// printf("num original ---%d\n", num);

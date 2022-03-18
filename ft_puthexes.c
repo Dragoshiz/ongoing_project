@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:51:44 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/17 13:52:45 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/18 18:14:03 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	ft_puthex_lo(unsigned int x)
 
 	count = 0;
 	repr_lo = "0123456789abcdef";
-	if (x == 0)
-		return (count);
-	if (x > 16)
+	if (x >= 16)
 		count += ft_puthex_lo(x / 16);
 	ft_putchar(repr_lo[x % 16]);
 	return (1 + count);
@@ -34,9 +32,7 @@ int	ft_puthex_upp(unsigned int xx)
 
 	count = 0;
 	repr_upp = "0123456789ABCDEF";
-	if (xx == 0)
-		return (count);
-	if (xx > 16)
+	if (xx >= 16)
 		count += ft_puthex_upp(xx / 16);
 	ft_putchar(repr_upp[xx % 16]);
 	return (1 + count);

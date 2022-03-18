@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:45:50 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/18 14:51:28 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/18 17:08:19 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_putchar(char c)
 
 int	ft_putstr(char *s)
 {
+	if (!s)
+		return (write(1, "(null)", 6));
 	write(1, s, ft_strlen(s));
 	return (ft_strlen(s));
 }
@@ -40,7 +42,7 @@ int	ft_get_digits(long n)
 
 	digits = 0;
 	if (n == 0)
-		return (digits);
+		return (1);
 	while (n != 0)
 	{
 		if (n < 0)
@@ -56,10 +58,15 @@ int	ft_get_digits(long n)
 
 int	ft_putnbr(int n)
 {	
-	long	modulednum;
+	int		modulednum;
 	int		digits;
 
 	digits = ft_get_digits(n);
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return (digits);
+	}
 	if (n < 0)
 	{
 		ft_putchar('-');
