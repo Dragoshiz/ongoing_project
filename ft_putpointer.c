@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 13:31:19 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/18 12:32:19 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/03/28 13:52:24 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_puthex(unsigned long p)
 	repr = "0123456789abcdef";
 	if (p == 0)
 		return (count);
-	if (p > 16)
+	if (p >= 16)
 		count += ft_puthex(p / 16);
 	ft_putchar(repr[p % 16]);
 	return (1 + count);
