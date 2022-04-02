@@ -6,12 +6,11 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:48:54 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/03/31 16:45:37 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:01:07 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	ft_check_mxint(long sum)
 {
@@ -62,4 +61,25 @@ int	ft_atoi(const char *str)
 	}
 	ft_check_mxint(sign * sum);
 	return (sign * sum);
+}
+
+void	ft_put_elem(int size, int *stack)
+{
+	while (size > 0)
+	{
+		stack[size] = stack[size - 1];
+		size--;
+	}
+}
+
+void	ft_remv_elem(int size, int *stack)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		stack[i] = stack[i + 1];
+		i++;
+	}
 }
