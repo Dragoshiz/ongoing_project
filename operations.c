@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:33:58 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/04 12:33:37 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/05 11:25:24 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_sa(int *a_stack)
 
 void	ft_sb(int *b_stack)
 {
-	t_switch(b_stack);
+	ft_switch(b_stack);
 	write(1, "sb\n", 3);
 }
 

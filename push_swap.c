@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 10:08:23 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/04 17:56:04 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/06 18:40:06 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,32 +92,33 @@ void	ft_check_dup(int argc, int *a_stack)
 // 		i++;
 // 	}
 // }
- 
-void	ft_is_ordered(t_counter *count, int *a_stack)
+bool	ft_is_ordered(t_counter *count, int *a_stack)
 {
 	int	i;
 
 	i = 0;
-	while(i < count->count_a - 1)
+	while (i < count->count_a - 1)
 	{
-		if(a_stack[i] > a_stack[i + 1])
-			printf("not ordered\n");//if it's not ordered then call function to make soritng
+		if (a_stack[i] > a_stack[i + 1])
+			return (false);//if it's not ordered then call function to make soritng
 		i++;
 	}
-	exit(0);
+	return (true);
 }
 
 int	main(int argc, char *argv[])
 {
 	int			*a_stack;
 	int			*b_stack;
+	int			*sorted_stack;
+	int			*index_stack;
 	t_counter	i;
 
 	b_stack = malloc(sizeof(int) * (argc));
 	if (!b_stack)
 		return (0);
 	i.count_a = argc - 1;
-	printf("%d main count\n", i.count_a);
+	// printf("%d a_stack size \n", i.count_a);
 	if (argc == 1)
 		exit(0);
 	if (argc == 2)
@@ -125,24 +126,28 @@ int	main(int argc, char *argv[])
 	ft_isnum(argv);
 	a_stack = ft_convert2int(argc, argv);
 	ft_check_dup(argc, a_stack);
-	ft_is_ordered(&i, a_stack);
-	// b_stack[0] = 10;
-	printf("%d, %d , %d, %d, %d , %d A__STACK\n",  a_stack[0],a_stack[1],a_stack[2],a_stack[3],a_stack[4],a_stack[5]);
-	ft_pb(&i, a_stack, b_stack);
-	ft_pb(&i, a_stack, b_stack);
-	ft_pb(&i, a_stack, b_stack);
-	ft_rrr(&i, a_stack, b_stack);
+	sorted_stack = ft_get_sorted(&i, a_stack);	
+	index_stack = ft_get_indexes(&i, sorted_stack, a_stack);
+	// printf("INDEX BEFORE\n");
+	// for (int k = 0; k < i.count_a; k++)
+	// 	printf("%d, ",  index_stack[k]);
+	// ft_rrr(&i, a_stack, b_stack);
 	// ft_rrb(i.count_a, a_stack);
-
-	printf("%d, %d , %d, %d, %d , %d A_STACK-------after\n",  a_stack[0],a_stack[1],a_stack[2],a_stack[3],a_stack[4],a_stack[5]);
+	
+	// for (int j = 0; j < i.count_a; j++)
+	// 	printf("%d, ",  sorted_stack[j]);
+	printf("\n");
+	ft_radix(argc, &i, a_stack, b_stack, index_stack);
+	// for (int k = 0; k < i.count_a; k++)
+	// 	printf("%d, ",  index_stack[k]);
 	// ft_pb(&i, a_stack, b_stack);
-	printf("%d, %d , %d, %d, %d , %d B__STAACK\n",  b_stack[0],b_stack[1],b_stack[2],b_stack[3],b_stack[4],b_stack[5]);
+	// printf("%d, %d , %d, %d, %d , %d B__STAACK\n",  b_stack[0],b_stack[1],b_stack[2],b_stack[3],b_stack[4],b_stack[5]);
 	// printf("%d, %d , %d, %d, %d , %d A_STAACK--after\n",  a_stack[0],a_stack[1],a_stack[2],a_stack[3],a_stack[4],a_stack[5]);
 	// ft_pa(&i, a_stack, b_stack);
 	// ft_pa(&i, a_stack, b_stack);
 	// printf("%d, %d , %d, %d, %d , %d B__STAACK\n",  b_stack[0],b_stack[1],b_stack[2],b_stack[3],b_stack[4],b_stack[5]);
-	printf("%d, %d , %d, %d, %d , %d A_STAACK--after\n",  a_stack[0],a_stack[1],a_stack[2],a_stack[3],a_stack[4],a_stack[5]);
+	// printf("%d, %d , %d, %d, %d , %d A_STAACK--after\n",  a_stack[0],a_stack[1],a_stack[2],a_stack[3],a_stack[4],a_stack[5]);
 
-	printf("%d count a ---- %d count b", i.count_a, i.count_b);
+	// printf("%d count a ---- %d count b", i.count_a, i.count_b);
 	return 0;
 }

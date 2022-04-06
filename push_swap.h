@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:56:32 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/04 12:42:11 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/06 17:50:31 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,9 @@ void		ft_reverse_rotate(int size, int *stack);
 void		ft_rra(int size, int *a_stack);
 void		ft_rrb(int size, int *b_stack);
 void		ft_rrr(t_counter *i, int *a_stack, int *b_stack);
+bool		ft_is_ordered(t_counter *count, int *a_stack);
+int			*ft_get_sorted(t_counter *count, int *a_stack);
+int			*ft_get_indexes(t_counter *count, int *sorted, int *a_stack);
+void	ft_radix(int argc, t_counter *count, int *a_stack, int *b_stack, int *index_stack);
 
 #endif
