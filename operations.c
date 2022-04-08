@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:33:58 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/05 11:25:24 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/08 15:45:24 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,25 @@ void	ft_ss(int *a_stack, int *b_stack)
 	write(1, "ss\n", 3);
 }
 
+void	ft_push(int *to_add, int *to_subt, int *stk_add, int *stk_subt)
+{
+	if (!stk_subt)
+		return ;
+	*to_add += 1;
+	ft_put_elem(*to_add, stk_add);
+	stk_add[0] = stk_subt[0];
+	ft_remv_elem(*to_subt, stk_subt);
+	*to_subt -= 1;
+}
 void	ft_pa(t_counter *i, int *a_stack, int *b_stack)
 {
-	if (!b_stack)
-		return ;
-	i->count_a += 1;
-	ft_put_elem(i->count_a, a_stack);
-	a_stack[0] = b_stack[0];
-	ft_remv_elem(i->count_b, b_stack);
-	i->count_b -= 1;
+	ft_push(&i->count_a, &i->count_b, a_stack, b_stack);
 	write(1, "pa\n", 3);
 }
 
 void	ft_pb(t_counter *i, int *a_stack, int *b_stack)
 {
-	if (!a_stack)
-		return ;
-	i->count_b += 1;
-	ft_put_elem(i->count_b, b_stack);
-	b_stack[0] = a_stack[0];
-	ft_remv_elem(i->count_a, a_stack);
-	i->count_a -= 1;
+	ft_push(&i->count_b, &i->count_a, b_stack, a_stack);
 	write(1, "pb\n", 3);
 }
 

@@ -6,89 +6,104 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:37:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/06 18:39:42 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/08 19:28:46 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*ft_get_sorted(t_counter *count, int *a_stack)
+int	*ft_get_sorted(t_counter *args, int *a_stack)
 {
-	int	*sorted_stack;
 	int	i;
 	int	temp;
 
-	sorted_stack = malloc(sizeof(int) * (count->count_a + 1));
+	args->sorted_st = malloc(sizeof(int) * (args->count_a + 1));
 	i = 0;
-	while (i < count->count_a)
+	while (i < args->count_a)
 	{
-		sorted_stack[i] = a_stack[i];
+		args->sorted_st[i] = a_stack[i];
 		i++;
 	}
 	i = 0;
-	while (!ft_is_ordered(count, sorted_stack))
+	while (!ft_is_ordered(args, args->sorted_st))
 	{
-		if (i == count->count_a - 1)
+		if (i == args->count_a - 1)
 			i = 0;
-		if (sorted_stack[i] > sorted_stack[i + 1])
+		if (args->sorted_st[i] > args->sorted_st[i + 1])
 		{
-			temp = sorted_stack[i + 1];
-			sorted_stack[i + 1] = sorted_stack[i];
-			sorted_stack[i] = temp;
+			temp = args->sorted_st[i + 1];
+			args->sorted_st[i + 1] = args->sorted_st[i];
+			args->sorted_st[i] = temp;
 		}
 		i++;
 	}
-	return (sorted_stack);
+	return (args->sorted_st);
 }
 
 //original stack and sorted original stack
-int	*ft_get_indexes(t_counter *count, int *sorted, int *a_stack)
+int	*ft_get_indexes(t_counter *i, int *a_stack)
 {
-	int	*index_stack;
-	int	i;
+	int	j;
 	int	counter;
 
-	index_stack = malloc(sizeof(int) * (count->count_a + 1));
+	i->idx_st = malloc(sizeof(int) * (i->count_a + 1));
 	counter = 0;
-	while (counter < count->count_a)
+	while (counter < i->count_a)
 	{
-		i = 1;
-		while (i <= count->count_a)
+		j = 1;
+		while (j <= i->count_a)
 		{
-			if (a_stack[counter] == sorted[i-1])
-				index_stack[counter] = i;
-			i++;
+			if (a_stack[counter] == i->sorted_st[j - 1])
+				i->idx_st[counter] = j;
+			j++;
 		}
 		counter++;
 	}
-	// free(sorted); //HERE YOU FREE SORTED
-	return (index_stack);
+	free(i->sorted_st);
+	return (i->idx_st);
 }
 
-void	ft_radix(int argc, t_counter *count, int *a_stack, int *b_stack, int *index_stack)
+void	ft_radix(t_counter *i, int *a_stack, int *b_stack)
+{
+	i->count_temp = 0;
+	i->bit = 1;
+	while (!ft_is_ordered(i, i->idx_st))
+	{
+		i->an_index = 1;
+		while (i->an_index++ < i->argc)
+		{
+			if (i->idx_st[0] & i->bit)
+			{
+				ft_rotate(i->count_index, i->idx_st);
+				ft_ra(i->count_a, a_stack);
+			}
+			else
+			{
+				ft_push(&i->count_temp, &i->count_index, i->tmp_st, i->idx_st);
+				ft_pb(i, a_stack, b_stack);
+			}
+		}
+		while (i->count_temp)
+		{
+			ft_push(&i->count_index, &i->count_temp, i->idx_st, i->tmp_st);
+			ft_pa(i, a_stack, b_stack);
+		}
+		i->bit <<= 1;
+	}
+}
+
+void	ft_sort3(t_counter *k, int *a_stack)
 {
 	int	i;
-	int	*temp_stack;
-	int	j;
 
-	temp_stack = malloc(sizeof(int) * (count->count_a + 1));
 	i = 1;
-	while (!ft_is_ordered(count, index_stack) && i <= 1280)
+	while (!ft_is_ordered(k, a_stack))
 	{
-		j = 1;
-		while (j < argc)
-		{
-			if (index_stack[0] & i)
-				ft_ra(count->count_a, index_stack);
-			else
-				ft_pb(count, index_stack, temp_stack);
-			j++;
-		}
-		while (count->count_b)
-		{
-			ft_pa(count, index_stack, temp_stack);
-		}
-		i *= 2;
+		if (a_stack[i] > a_stack[i - 1] && a_stack[i] > a_stack[i + 1])
+			ft_rra(k->count_a, a_stack);
+		if (a_stack[i - 1] > a_stack[i] && a_stack[i - 1] > a_stack[i + 1])
+			ft_ra(k->count_a, a_stack);
+		if (a_stack[i] < a_stack[i - 1])
+			ft_sa(a_stack);
 	}
-	// printf("%d", i);
 }
