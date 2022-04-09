@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:56:32 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/09 19:01:41 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/09 20:03:47 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_isdigit(int ch);
 void	ft_check_mxint(long sum);
 void	ft_err_msg(void);
 int		*ft_convert2int(int argc, char *argv[]);
-void	ft_check_isnum(int argc, char *argv[]);
+void	ft_isnum(char *argv[]);
 void	ft_check_dup(int argc, int *a_stack);
 void	ft_switch(int *stack);
 void	ft_sa(int *a_stack);
@@ -65,6 +65,8 @@ void	ft_sort5(t_counter *i, int *a_stack, int *b_stack);
 void	ft_initialize(t_counter *i, int argc);
 void	ft_sort(t_counter *i, int *a_stack, int *b_stack);
 void	ft_free(t_counter *i, int *a_stack, int *b_stack);
+int		main(int argc, char *argv[]);
+
 
 
 #endif
