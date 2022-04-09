@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:33:58 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/08 15:45:24 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/09 15:07:42 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_switch(int *stack)
 {
 	int	temp;
 
-	if (!stack[0] || !stack[1])
+	if (!stack[0])
 		exit(0);
 	temp = stack[0];
 	stack[0] = stack[1];

@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:37:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/08 19:28:46 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/09 18:29:11 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,33 @@ void	ft_sort3(t_counter *k, int *a_stack)
 		if (a_stack[i] < a_stack[i - 1])
 			ft_sa(a_stack);
 	}
+}
+
+void	ft_sort5(t_counter *i, int *a_stack, int *b_stack)
+{
+	int	k;
+
+	k = 1;
+	while (!ft_is_ordered(i, a_stack))
+	{
+		if (i->idx_st[0] == k && k < 4)
+		{
+			ft_push(&i->count_temp, &i->count_index, i->tmp_st, i->idx_st);
+			ft_pb(i, a_stack, b_stack);
+			k++;
+		}
+		else if (k == i->idx_st[1])
+		{
+			ft_switch(i->idx_st);
+			ft_sa(a_stack);
+		}
+		else if (k == i->idx_st[i->count_a - 1] || \
+			k == i->idx_st[i->count_a - 2])
+		{
+			ft_reverse_rotate(i->count_index, i->idx_st);
+			ft_rra(i->count_a, a_stack);
+		}
+	}
+	while (i->count_b != 0)
+		ft_pa(i, a_stack, b_stack);
 }

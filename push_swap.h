@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:56:32 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/08 19:21:58 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/09 19:01:41 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_counter
 	int	count_index;
 	int	count_temp;
 	int	argc;
-	int	*s_st;
 	int	*idx_st;
 	int	*tmp_st;
 	int	*sorted_st;
@@ -62,5 +61,10 @@ int		*ft_get_indexes(t_counter *i, int *a_stack);
 void	ft_radix(t_counter *i, int *a_stack, int *b_stack);
 void	ft_push(int *to_add, int *to_subt, int *stk_add, int *stk_subt);
 void	ft_sort3(t_counter *k, int *a_stack);
+void	ft_sort5(t_counter *i, int *a_stack, int *b_stack);
+void	ft_initialize(t_counter *i, int argc);
+void	ft_sort(t_counter *i, int *a_stack, int *b_stack);
+void	ft_free(t_counter *i, int *a_stack, int *b_stack);
+
 
 #endif
