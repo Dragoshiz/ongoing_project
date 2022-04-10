@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:56:32 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/09 20:03:47 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:10:12 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,5 @@ void	ft_initialize(t_counter *i, int argc);
 void	ft_sort(t_counter *i, int *a_stack, int *b_stack);
 void	ft_free(t_counter *i, int *a_stack, int *b_stack);
 int		main(int argc, char *argv[]);
-
-
 
 #endif
