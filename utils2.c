@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:57:49 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/09 19:58:24 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:02:12 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ void	ft_sort(t_counter *i, int *a_stack, int *b_stack)
 	}
 	else if (i->count_a <= 5)
 	{
+		i->an_index = 1;
 		ft_sort5(i, a_stack, b_stack);
+		ft_sort3(i, a_stack);
+		while (i->count_b != 0)
+			ft_pa(i, a_stack, b_stack);
 		return ;
 	}
 	else

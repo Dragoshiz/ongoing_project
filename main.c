@@ -6,13 +6,11 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:22:37 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/09 20:02:25 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:39:59 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-#include <limits.h>
 
 int	main(int argc, char *argv[])
 {
@@ -36,9 +34,13 @@ int	main(int argc, char *argv[])
 	}
 	i.sorted_st = ft_get_sorted(&i, a_stack);
 	i.idx_st = ft_get_indexes(&i, a_stack);
+	// for(int k = 0; k < argc- 1; k++)
+		// printf("%d ", a_stack[k]);
+	// printf("BEFORE\n");
 	ft_sort(&i, a_stack, b_stack);
-	for (int k = 0; k < i.count_a; k++)
-		printf("%d, a_stack ", a_stack[k]);
+	// for(int k = 0; k < argc - 1; k++)
+	// 	printf("%d ", a_stack[k]);
 	ft_free(&i, a_stack, b_stack);
+	
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/09 20:04:47 by dimbrea           #+#    #+#              #
-#    Updated: 2022/04/09 20:35:29 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/04/09 21:04:54 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,14 @@ sort.c \
 switch.c \
 utils.c \
 utils2.c \
+rotate.c \
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		$(CC) $(CFLAGS) $(OBJ)
+		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 		$(RM) $(OBJ)

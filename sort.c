@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:37:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/09 18:29:11 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:01:45 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	*ft_get_sorted(t_counter *args, int *a_stack)
 	return (args->sorted_st);
 }
 
-//original stack and sorted original stack
 int	*ft_get_indexes(t_counter *i, int *a_stack)
 {
 	int	j;
@@ -70,7 +69,7 @@ void	ft_radix(t_counter *i, int *a_stack, int *b_stack)
 	while (!ft_is_ordered(i, i->idx_st))
 	{
 		i->an_index = 1;
-		while (i->an_index++ < i->argc)
+		while (i->an_index++ < i->argc && !ft_is_ordered(i, i->idx_st))
 		{
 			if (i->idx_st[0] & i->bit)
 			{
@@ -110,29 +109,28 @@ void	ft_sort3(t_counter *k, int *a_stack)
 
 void	ft_sort5(t_counter *i, int *a_stack, int *b_stack)
 {
-	int	k;
-
-	k = 1;
-	while (!ft_is_ordered(i, a_stack))
+	while (!ft_is_ordered(i, a_stack) && i->an_index < 3)
 	{
-		if (i->idx_st[0] == k && k < 4)
+		if (i->idx_st[0] == i->an_index)
 		{
 			ft_push(&i->count_temp, &i->count_index, i->tmp_st, i->idx_st);
 			ft_pb(i, a_stack, b_stack);
-			k++;
+			i->an_index++;
 		}
-		else if (k == i->idx_st[1])
+		else if (i->an_index == i->idx_st[1])
 		{
 			ft_switch(i->idx_st);
 			ft_sa(a_stack);
 		}
-		else if (k == i->idx_st[i->count_a - 1] || \
-			k == i->idx_st[i->count_a - 2])
+		else if (i->an_index == i->idx_st[2])
+		{
+			ft_rotate(i->count_index, i->idx_st);
+			ft_ra(i->count_a, a_stack);
+		}
+		else if (i->an_index == i->idx_st[4] || i->an_index == i->idx_st[3])
 		{
 			ft_reverse_rotate(i->count_index, i->idx_st);
 			ft_rra(i->count_a, a_stack);
 		}
 	}
-	while (i->count_b != 0)
-		ft_pa(i, a_stack, b_stack);
 }
