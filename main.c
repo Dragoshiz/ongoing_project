@@ -5,36 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 19:22:37 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/10 18:22:05 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/04/15 16:29:25 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/04/16 16:21:26 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "pipex.h"
+
+//this function checks if files exists and if executable is valid
+int	ft_exist(int argc, char *argv[])
+{
+	int	i;
+
+	i = 1;
+	while ()
+}
 
 int	main(int argc, char *argv[])
 {
-	int			*a_stack;
-	int			*b_stack;
-	t_counter	i;
+	int fd;
 
-	if (argc == 1 || argc == 2)
-		exit(0);
-	b_stack = malloc(sizeof(int) * (argc));
-	if (!b_stack)
-		return (0);
-	ft_isnum(argv);
-	a_stack = ft_convert2int(argc, argv);
-	ft_check_dup(argc, a_stack);
-	ft_initialize(&i, argc);
-	if (ft_is_ordered(&i, a_stack))
+	
+	if (argc == 5)
 	{
-		ft_free(&i, a_stack, b_stack);
-		exit(0);
+		
 	}
-	i.sorted_st = ft_get_sorted(&i, a_stack);
-	i.idx_st = ft_get_indexes(&i, a_stack);
-	ft_sort(&i, a_stack, b_stack);
-	ft_free(&i, a_stack, b_stack);
-	return (0);
+	
 }

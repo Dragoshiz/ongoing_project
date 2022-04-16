@@ -1,6 +1,3 @@
 {
-	"files.associations": {
-		"*.py": "python",
-		"push_swap.h": "c"
-	}
+	"cmake.configureOnOpen": false
 }
