@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dimbrea <dimbrea@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:47:43 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/01/03 15:15:49 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/01/04 20:00:59 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+/*
+Description Outputs the string ’s’ to the given file
+descriptor, followed by a newline.
+*/
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+void	ft_putendl_fd(char *s, int fd)
 {
-	t_mlx	mlx;
-	int		fd;
-	t_map	map;
-	char	*line;
-	if (argc != 2)
-		return (0);
-	ft_get_map(&map, argv[1]);
-	return (0);
+	int	len;
+
+	len = ft_strlen(s);
+	write(fd, s, len);
+	write(fd, "\n", 1);
 }

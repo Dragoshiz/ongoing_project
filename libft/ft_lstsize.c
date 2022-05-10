@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dimbrea <dimbrea@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:47:43 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/01/15 15:22:48 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/01/15 16:00:14 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+/* Counts the number of nodes in a list. */
 
-int	main(int argc, char *argv[])
+#include "libft.h"
+
+int	ft_lstsize(t_list *lst)
 {
-	t_mlx	mlx;
-	int		fd;
-	t_map	map;
-	char	*line;
-	if (argc != 2)
-		return (0);
-	ft_get_map(&map, argv[1]);
-	return (0);
+	int		i;
+	t_list	*current;
+
+	current = lst;
+	i = 0;
+	while (current != NULL)
+	{
+		i++;
+		current = current->next;
+	}
+	return (i);
 }

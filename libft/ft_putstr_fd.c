@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dimbrea <dimbrea@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:47:43 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/01/03 15:00:50 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/01/04 16:21:54 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+/*
+description Outputs the string ’s’ to the given file
+descriptor.
+*/
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_mlx	mlx;
-	int		fd;
-	t_map	map;
-	char	*line;
-	if (argc != 2)
-		return (0);
-	ft_get_map(&map, argv[1]);
-	return (0);
+	int	len;
+
+	len = ft_strlen(s);
+	write(fd, s, len);
 }

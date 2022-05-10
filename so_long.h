@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:47:43 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/05/09 12:19:16 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/05/10 15:53:13 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef SO_LONG_H
+# define SO_LONG_H
+# include "mlx.h"
+# include "libft/libft.h"
 
-int	main(int argc, char *argv[])
+typedef struct s_mlx
 {
-	t_mlx	mlx;
-	int		fd;
-	t_map	map;
+	void	*mlx_pointer;
+	void	*window;
+}t_mlx;
+typedef struct s_map
+{
+	int		map_height;
+	int		map_width;
+	int		readval;
 	char	*line;
-	if (argc != 2)
-		return (0);
-	ft_get_map(&map, argv[1]);
-	return (0);
-}
+}t_map;
+int				ft_get_map(t_map *map, char *argv);
+static char		**ft_dest_row(char const *s, char c, char **dest, int rows);
+
+#endif

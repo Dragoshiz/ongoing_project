@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dimbrea <dimbrea@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:47:43 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/01/16 15:01:32 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/01/16 16:06:34 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+/*
+Iterates the list ’lst’ and applies the function
+’f’ on the content of each node.
+*/
 
-int	main(int argc, char *argv[])
+#include "libft.h"
+
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_mlx	mlx;
-	int		fd;
-	t_map	map;
-	char	*line;
-	if (argc != 2)
-		return (0);
-	ft_get_map(&map, argv[1]);
-	return (0);
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }

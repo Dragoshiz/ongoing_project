@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dimbrea <dimbrea@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 16:30:09 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/04/16 14:27:54 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/01/03 12:35:42 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/01/04 14:40:51 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include <stdio.h>
-# include <unistd.h>
+/*
+Description Outputs the character ’c’ to the given file
+descriptor.
+*/
+#include "libft.h"
 
-typedef struct s_args
+void	ft_putchar_fd(char c, int fd)
 {
-	int	whateva;
-}t_args;
-
-
-
-#endif
+	write(fd, &c, 1);
+}

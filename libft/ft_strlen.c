@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:47:43 by dimbrea          ###   ########.fr       */
+/*   Created: 2021/11/22 11:00:49 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/05/10 13:28:52 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+/*
+strlen - calculate the length of a string
+The strlen() function calculates the length of
+the string pointed to by s, excluding the terminating null byte ('\0').
+*/
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+size_t	ft_strlen(const char *str)
 {
-	t_mlx	mlx;
-	int		fd;
-	t_map	map;
-	char	*line;
-	if (argc != 2)
-		return (0);
-	ft_get_map(&map, argv[1]);
-	return (0);
+	size_t	n;
+
+	n = 0;
+	while (str[n] != '\0')
+		n++;
+	return (n);
 }

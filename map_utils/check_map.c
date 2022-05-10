@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:47:43 by dimbrea          ###   ########.fr       */
+/*   Created: 2022/05/10 11:14:51 by dimbrea           #+#    #+#             */
+/*   Updated: 2022/05/10 15:53:16 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-int	main(int argc, char *argv[])
+int	ft_get_map(t_map *map, char *argv)
 {
-	t_mlx	mlx;
 	int		fd;
-	t_map	map;
-	char	*line;
-	if (argc != 2)
-		return (0);
-	ft_get_map(&map, argv[1]);
+
+	fd = open(argv, O_RDONLY);
+	while ((map->line = get_next_line(fd)) > 0)
+	{
+		printf("%s", map->line);
+		map->map_height++;
+	}
+	printf("%d", map->map_height);
 	return (0);
 }
