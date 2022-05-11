@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:46:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 13:29:43 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/10 18:34:13 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_strjoin(char *save, char *buffer)
 	i = 0;
 	while (save[i])
 	{
+		if (save[i] == '\n')
+			break ;
 		p[i] = save[i];
 		i++;
 	}

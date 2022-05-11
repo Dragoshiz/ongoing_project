@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:11:52 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/10 15:51:31 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/11 11:03:11 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,24 +20,25 @@ RM = rm -f
 
 AF = ar rcs
 
-SRCS = \
-map_utils/check_map.c \
-main.c\
+SRCS =	map_utils/check_map.c \
+		main.c \
+
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-				$(CC) $(OBJS) -o $(NAME)
-				$(MAKE) -C libft/
+				make -C libft
+				$(CC) $(OBJS) -g -o $(NAME) libft/libft.a
 
 clean:
-	$(RM) $(OBJS)
-	$(MAKE) -C libft/make clean
+	$(RM) $(OBJS) 
+	make clean -C libft
 
 fclean: clean
 	$(RM) $(NAME)
+	make fclean -C libft
 
 re: fclean all
 

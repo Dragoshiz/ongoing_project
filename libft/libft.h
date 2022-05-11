@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:15:13 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 15:52:29 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/10 16:55:58 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(char *buffer, char c);
-char	*ft_strdup(const char *src);
+char	*ft_strdup_nonl(const char *src);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char *save, char *buffer);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
@@ -72,5 +72,8 @@ char	*ft_read_n_save(int fd, char *save);
 char	*ft_get_line(char *save);
 char	*ft_update_save(char *save);
 char	*get_next_line(int fd);
+char	*ft_read_n_save(int fd, char *save);
+char	*ft_get_line(char *save);
+char	*ft_update_save(char *save);
 
 #endif

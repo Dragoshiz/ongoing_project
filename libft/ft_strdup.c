@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimbrea <dimbrea@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:57:16 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/01/04 14:49:27 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/10 16:55:06 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ DESCRIPTION
 */
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup_nonl(const char *src)
 {
 	int		i;
 	char	*p;
@@ -31,6 +31,8 @@ char	*ft_strdup(const char *src)
 	i = 0;
 	while (src[i] != '\0')
 	{
+		if (src[i] == '\n')
+			break;
 		p[i] = src[i];
 		i++;
 	}
