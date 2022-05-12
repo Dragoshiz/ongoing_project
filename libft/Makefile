@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 16:02:04 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/11 11:07:18 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/12 10:26:56 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror 
 
 RM = rm -f
 

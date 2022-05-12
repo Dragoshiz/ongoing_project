@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:11:52 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/11 11:03:11 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/12 12:22:20 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ RM = rm -f
 AF = ar rcs
 
 SRCS =	map_utils/check_map.c \
+		map_utils/map_err_msg.c \
 		main.c \
 
 

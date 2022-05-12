@@ -1,7 +1,32 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": []
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "(lldb) Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/Users/dimbrea/Documents/42core/ongoing_project/so_long",
+      "args": [
+        "map.ber"
+      ],
+      "stopAtEntry": false,
+      "cwd": "/Users/dimbrea/Documents/42core/ongoing_project",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": ["map.ber"],
+      "stopAtEntry": true,
+      "cwd": "/Users/dimbrea/Documents/42core/ongoing_project",
+      "environment": [],
+      "program": "/Users/dimbrea/Documents/42core/ongoing_project/so_long",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "console": "integratedTerminal"
+    }
+  ]
 }
