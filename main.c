@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/11 18:28:58 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/12 12:36:12 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char *argv[])
 {
-	// t_mlx	mlx;
+	t_mlx	mlx;
 	t_map	map;
 
 	if (argc != 2)
