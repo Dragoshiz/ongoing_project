@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:19:16 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/12 12:36:02 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/12 15:46:37 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@
 
 typedef struct s_mlx
 {
-	void	*mlx_pointer;
+	void	*ptr;
 	void	*window;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
 }t_mlx;
 typedef struct s_map
 {
-	int		map_height;
-	int		map_width;
+	size_t	map_height;
+	size_t	map_width;
 	char	*line;
 }t_map;
 void	ft_pec_errmsg(void);

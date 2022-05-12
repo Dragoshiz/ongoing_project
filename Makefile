@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:11:52 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/12 12:59:32 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/12 14:54:26 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ CC = gcc
 
 RM = rm -f
 
-# CFLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 
-AF = ar rcs
+AF = ar rc
 
 MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
@@ -33,16 +33,17 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 				make -C libft
-				make -C mlx
-				$(CC) $(OBJ)  libft/libft.a $(MLX) mlx/libmlx.a -o $(NAME)
+				cp ./libft/libft.a libft_so_long.a
+				$(AF) libft_so_long.a $(OBJS)
+				$(CC) $(FLAGS) -L. ./libft_so_long.a ./mlx/libmlx.a $(MLX) $(OBJS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS) 
 	make clean -C libft
-	make clean -C mlx
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) libft_so_long.a
 	make fclean -C libft
 	
 

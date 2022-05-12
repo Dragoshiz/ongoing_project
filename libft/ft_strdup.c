@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 19:57:16 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/10 16:55:06 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/12 15:11:14 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ char	*ft_strdup_nonl(const char *src)
 	if (p == NULL)
 		return (NULL);
 	i = 0;
-	while (src[i] != '\0')
+	while (src[i] != '\0' || src[i] == '\n')
 	{
-		if (src[i] == '\n')
-			break;
 		p[i] = src[i];
 		i++;
 	}
