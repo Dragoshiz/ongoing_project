@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:11:52 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/12 14:54:26 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/13 15:38:16 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 SRCS =	map_utils/check_map.c \
 		map_utils/map_err_msg.c \
+		map_utils/put_img.c\
 		main.c \
 
 

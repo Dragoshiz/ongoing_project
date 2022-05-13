@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:40:12 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/12 17:41:57 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/13 18:53:52 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,22 @@ void	ft_mlx_pixel_input(t_mlx *mlx, int x, int y, int color)
 
 int	main(int argc, char *argv[])
 {
-	t_mlx	mlx;
 	t_map	map;
-	int		width;
-	int		heigth;
-	char	*turd;
+	t_mlx	mlx;
 
-	turd = "./srcs/turd.xpm";
-	if (argc != 2) 
+	if (argc != 2)
 		return (0);
-	// ft_get_map(&map, argv[1]);
-	mlx.ptr = mlx_init();
-	// mlx.window = mlx_new_window(mlx.ptr, 1920, 1080, "turd");
+	map.map_height = 0;
+	ft_get_map(&map, argv[1]);
+	ft_start(&mlx, &map);
 	// mlx.img = mlx_new_image(mlx.ptr, 1920, 1080);
-	// mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bpp,
-	// 		&mlx.line_length, &mlx.endian);
-	mlx.img = mlx_xpm_file_to_image(mlx.ptr, turd, &width, &heigth);
+	// mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bpp,	
+			// &mlx.line_length, &mlx.endian);
+	// ft_mlx_pixel_input(&mlx.img, 5, 5, 0x00FF0000);
+	// mlx.img = mlx_xpm_file_to_image(mlx.ptr, tile, &width, &heigth);
 	// mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img, 0, 0);
+	// mlx.img = mlx_xpm_file_to_image(mlx.ptr, tile, &width, &heigth);
+	// mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img, 64, 0);
 	// mlx_loop(mlx.ptr);
 	return (0);
 }

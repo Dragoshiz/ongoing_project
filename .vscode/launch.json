@@ -6,10 +6,8 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "/Users/dimbrea/Documents/42core/ongoing_project/so_long",
-      "args": [
-        "map.ber"
-      ],
-      "stopAtEntry": false,
+      "args": ["map.ber"],
+      "stopAtEntry": true,
       "cwd": "/Users/dimbrea/Documents/42core/ongoing_project",
       "environment": [],
       "externalConsole": false,
@@ -19,11 +17,11 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": ["map.ber"],
+      "args": [],
       "stopAtEntry": true,
       "cwd": "/Users/dimbrea/Documents/42core/ongoing_project",
       "environment": [],
-      "program": "/Users/dimbrea/Documents/42core/ongoing_project/so_long",
+      "program": "/Users/dimbrea/Documents/42core/ongoing_project/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "console": "integratedTerminal"

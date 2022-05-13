@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:14:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/12 15:47:02 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/13 18:50:41 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_check_pec10(t_map *map)
 	}
 }
 
-int	ft_check_sizenwall(t_map *map)
+void	ft_check_sizenwall(t_map *map)
 {
 	int	i;
 
@@ -94,7 +94,6 @@ int	ft_check_sizenwall(t_map *map)
 		else
 			ft_wall_errmsg();
 	}
-	return (1);
 }
 
 // free(map->line);free somewhere map->line
@@ -112,7 +111,8 @@ int	ft_get_map(t_map *map, char *argv)
 	free(line);
 	while (line != NULL)
 	{
-		map->map_height++;
+		map->map_height += 1;
+		printf("%d", map->map_height);
 		line = get_next_line(fd);
 		if (line)
 		{	
