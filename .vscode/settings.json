@@ -26,5 +26,11 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "files.associations": {
+    "*.py": "python",
+    "libft.h": "c",
+    "__node_handle": "c",
+    "so_long.h": "c"
+  }
 }

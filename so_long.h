@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:19:16 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/13 18:52:56 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/14 18:04:25 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define SO_LONG_H
 # include "mlx/mlx.h"
 # include "libft/libft.h"
+# define WALL "./srcs/wall.xpm"
+# define COLLECT "srcs/turd.xpm"
+# define EXITC "srcs/c-door.xpm"
+# define EXITO "srcs/o-door.xpm"
+# define PLAYER "srcs/down-fly.xpm"
+# define ESC 0x35
 
 typedef struct s_mlx
 {
@@ -31,6 +37,7 @@ typedef struct s_map
 	size_t	map_height;
 	int		width;
 	int		height;
+	int		collect;
 	char	*line;
 	char	*tile;
 	char	*wall;

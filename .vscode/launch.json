@@ -6,7 +6,9 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "/Users/dimbrea/Documents/42core/ongoing_project/so_long",
-      "args": ["map.ber"],
+      "args": [
+        "map.ber"
+      ],
       "stopAtEntry": true,
       "cwd": "/Users/dimbrea/Documents/42core/ongoing_project",
       "environment": [],
@@ -23,7 +25,7 @@
       "environment": [],
       "program": "/Users/dimbrea/Documents/42core/ongoing_project/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
-      "MIMode": "gdb",
+      "MIMode": "lldb",
       "console": "integratedTerminal"
     }
   ]

@@ -6,12 +6,13 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:14:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/13 18:50:41 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/14 17:26:15 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//check the if .ber extension is met
 void	ft_check_extension(char *argv)
 {
 	int	end;
@@ -28,17 +29,17 @@ void	ft_check_extension(char *argv)
 	}
 }
 
+//checks if there is at least one of each (player,collectible,exit)
 void	ft_check_pec(t_map *map)
 {
 	int	i;
 	int	p;
 	int	e;
-	int	c;
 
 	i = 0;
 	p = 0;
 	e = 0;
-	c = 0;
+	map->collect = 0;
 	while (map->line[i])
 	{
 		if (map->line[i] == 'P')
@@ -46,13 +47,14 @@ void	ft_check_pec(t_map *map)
 		if (map->line[i] == 'E')
 			e++;
 		if (map->line[i] == 'C')
-			c++;
+			map->collect++;
 		i++;
 	}
-	if (p == 0 || e == 0 || c == 0)
+	if (p == 0 || e == 0 || map->collect == 0)
 		ft_pec_errmsg();
 }
 
+//checks that the map has only allowed characters
 void	ft_check_pec10(t_map *map)
 {
 	int		i;
@@ -112,7 +114,6 @@ int	ft_get_map(t_map *map, char *argv)
 	while (line != NULL)
 	{
 		map->map_height += 1;
-		printf("%d", map->map_height);
 		line = get_next_line(fd);
 		if (line)
 		{	
