@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:14:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/14 17:26:15 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:06:32 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_check_extension(char *argv)
 	int	end;
 
 	end = ft_strlen(argv) - 1;
-
 	if (argv[end] == 'r' && argv[end - 1] == 'e'
 		&& argv[end - 2] == 'b' && argv[end - 3] == '.')
 		return ;
@@ -30,7 +29,7 @@ void	ft_check_extension(char *argv)
 }
 
 //checks if there is at least one of each (player,collectible,exit)
-void	ft_check_pec(t_map *map)
+void	ft_check_pec(t_mlx *mlx)
 {
 	int	i;
 	int	p;
@@ -39,59 +38,62 @@ void	ft_check_pec(t_map *map)
 	i = 0;
 	p = 0;
 	e = 0;
-	map->collect = 0;
-	while (map->line[i])
+	mlx->map.collect = 0;
+	while (mlx->map.line[i])
 	{
-		if (map->line[i] == 'P')
+		if (mlx->map.line[i] == 'P')
+		{
 			p++;
-		if (map->line[i] == 'E')
+			mlx->map.player = i;
+		}
+		if (mlx->map.line[i] == 'E')
 			e++;
-		if (map->line[i] == 'C')
-			map->collect++;
+		if (mlx->map.line[i] == 'C')
+			mlx->map.collect++;
 		i++;
 	}
-	if (p == 0 || e == 0 || map->collect == 0)
+	if (p == 0 || e == 0 || mlx->map.collect == 0)
 		ft_pec_errmsg();
 }
 
 //checks that the map has only allowed characters
-void	ft_check_pec10(t_map *map)
+void	ft_check_pec10(t_mlx *mlx)
 {
 	int		i;
 
 	i = 0;
-	while (map->line[i])
+	while (mlx->map.line[i])
 	{
-		if (map->line[i] != 'P' && map->line[i] != 'E'
-			&& map->line[i] != 'C' && map->line[i] != '1'
-			&& map->line[i] != '0')
+		if (mlx->map.line[i] != 'P' && mlx->map.line[i] != 'E'
+			&& mlx->map.line[i] != 'C' && mlx->map.line[i] != '1'
+			&& mlx->map.line[i] != '0')
 			ft_map_errmsg();
 		i++;
 	}
 }
 
-void	ft_check_sizenwall(t_map *map)
+void	ft_check_sizenwall(t_mlx *mlx)
 {
 	int	i;
 
 	i = 0;
-	if (map->map_height * map->map_width != ft_strlen(map->line))
+	if (mlx->map.map_height * mlx->map.map_width != ft_strlen(mlx->map.line))
 		ft_wall_errmsg();
-	while (i++ < map->map_width)
-		if (map->line[i] != '1')
+	while (i++ < mlx->map.map_width)
+		if (mlx->map.line[i] != '1')
 			ft_wall_errmsg();
-	i = ft_strlen(map->line) - map->map_width - 1;
-	while (i++ < ft_strlen(map->line) - 1)
-		if (map->line[i] != '1')
+	i = ft_strlen(mlx->map.line) - mlx->map.map_width - 1;
+	while (i++ < ft_strlen(mlx->map.line) - 1)
+		if (mlx->map.line[i] != '1')
 			ft_wall_errmsg();
-	i = map->map_width;
-	while (i < ft_strlen(map->line) - map->map_width - 1)
+	i = mlx->map.map_width;
+	while (i < ft_strlen(mlx->map.line) - mlx->map.map_width - 1)
 	{
-		if (map->line[i] == '1')
-			i += map->map_width - 1;
+		if (mlx->map.line[i] == '1')
+			i += mlx->map.map_width - 1;
 		else
 			ft_wall_errmsg();
-		if (map->line[i] == '1')
+		if (mlx->map.line[i] == '1')
 			i += 1;
 		else
 			ft_wall_errmsg();
@@ -99,7 +101,7 @@ void	ft_check_sizenwall(t_map *map)
 }
 
 // free(map->line);free somewhere map->line
-int	ft_get_map(t_map *map, char *argv)
+int	ft_get_map(t_mlx *mlx, char *argv)
 {
 	char	*line;
 	int		fd;
@@ -108,22 +110,22 @@ int	ft_get_map(t_map *map, char *argv)
 	line = get_next_line(fd);
 	if (!line)
 		ft_empty_errmsg();
-	map->map_width = ft_strlen(line) - 1;
-	map->line = ft_strdup_nonl(line);
+	mlx->map.map_width = ft_strlen(line) - 1;
+	mlx->map.line = ft_strdup_nonl(line);
 	free(line);
 	while (line != NULL)
 	{
-		map->map_height += 1;
+		mlx->map.map_height += 1;
 		line = get_next_line(fd);
 		if (line)
 		{	
-			map->line = ft_strjoin(map->line, line);
+			mlx->map.line = ft_strjoin(mlx->map.line, line);
 			free(line);
 		}
 	}
 	ft_check_extension(argv);
-	ft_check_sizenwall(map);
-	ft_check_pec10(map);
-	ft_check_pec(map);
+	ft_check_sizenwall(mlx);
+	ft_check_pec10(mlx);
+	ft_check_pec(mlx);
 	return (1);
 }
