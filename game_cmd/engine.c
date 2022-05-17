@@ -6,26 +6,28 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:06:55 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/17 16:49:56 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/17 19:21:22 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//destroys img and rerender it
+//destroys img and renders it + counts steps
 void	ft_dstroy_n_put(t_mlx *mlx)
 {
-	int	i;
+	int		i;
+	char	*c;
 
 	i = 0;
+	c = ft_itoa(mlx->map.steps);
 	while (mlx->map.line[i++])
 		if (mlx->map.line[i] == 'P')
 			mlx->map.player = i;
 	mlx_destroy_image(mlx->ptr, mlx->img);
-	write(1, ft_itoa(mlx->map.steps), sizeof(int));
-	write(1, "\n", 1);
 	ft_put_tiles(mlx);
 	ft_put_all(mlx);
+	mlx_string_put(mlx->ptr, mlx->window, 10, 10, 0x0, c);
+	free(c);
 }
 
 //exit function

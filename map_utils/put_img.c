@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:40:29 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/17 16:52:57 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/17 19:14:55 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_put_xpm(char c, t_mlx *mlx, int x, int y)
 		mlx->img = mlx_xpm_file_to_image(mlx->ptr, mlx->map.p_path,
 				&mlx->map.width, &mlx->map.height);
 	if (c == 'X')
-		mlx->img = mlx_xpm_file_to_image(mlx->ptr, "srcs/web.xpm",
+		mlx->img = mlx_xpm_file_to_image(mlx->ptr, mlx->map.x_path,
 				&mlx->map.width, &mlx->map.height);
 }
 
@@ -87,6 +87,25 @@ void	ft_put_all(t_mlx *mlx)
 	}
 }
 
+int	ft_loop(t_mlx *mlx)
+{
+	static int	i;
+
+	if (i == 21)
+		i = 0;
+	if (i == 5)
+		mlx->map.x_path = "srcs/web.xpm";
+	if (i == 10)
+		mlx->map.x_path = "srcs/web-2.xpm";
+	if (i == 15)
+		mlx->map.x_path = "srcs/web-3.xpm";
+	if (i == 20)
+		mlx->map.x_path = "srcs/web-4.xpm";
+	i++;
+	ft_dstroy_n_put(mlx);
+	return (0);
+}
+
 void	ft_start(t_mlx *mlx)
 {
 	mlx->ptr = mlx_init();
@@ -96,5 +115,6 @@ void	ft_start(t_mlx *mlx)
 	ft_put_all(mlx);
 	mlx_hook(mlx->window, 2, (1L << 0), ft_keypress, mlx);
 	mlx_hook(mlx->window, 17, 0L, ft_x, mlx);
+	mlx_loop_hook(mlx->ptr, &ft_loop, mlx);
 	mlx_loop(mlx->ptr);
 }

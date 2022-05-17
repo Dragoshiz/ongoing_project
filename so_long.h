@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:19:16 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/17 16:50:22 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/17 18:14:48 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_map
 {
 	size_t	map_width;
 	size_t	map_height;
-	char	*p_path;
 	int		steps;
 	int		player;
 	int		x;
@@ -42,6 +41,8 @@ typedef struct s_map
 	int		height;
 	int		collect;
 	char	*line;
+	char	*x_path;
+	char	*p_path;
 }t_map;
 typedef struct s_mlx
 {
@@ -50,6 +51,7 @@ typedef struct s_mlx
 	void	*img;
 	t_map	map;
 }t_mlx;
+int		ft_loop(t_mlx *mlx);
 void	ft_game_over(void);
 int		ft_x(void);
 void	ft_esc(t_mlx *mlx);
