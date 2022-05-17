@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:14:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/16 18:06:32 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/17 16:37:27 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,23 @@ void	ft_check_extension(char *argv)
 	else
 	{
 		perror("Map must be with a .ber extension.");
-		exit(1);
+		exit(0);
+	}
+}
+
+//checks that the map has only the allowed characters
+void	ft_check_pec10(t_mlx *mlx)
+{
+	int		i;
+
+	i = 0;
+	while (mlx->map.line[i])
+	{
+		if (mlx->map.line[i] != 'P' && mlx->map.line[i] != 'E'
+			&& mlx->map.line[i] != 'C' && mlx->map.line[i] != '1'
+			&& mlx->map.line[i] != '0' && mlx->map.line[i] != 'X')
+			ft_map_errmsg();
+		i++;
 	}
 }
 
@@ -52,26 +68,12 @@ void	ft_check_pec(t_mlx *mlx)
 			mlx->map.collect++;
 		i++;
 	}
-	if (p == 0 || e == 0 || mlx->map.collect == 0)
+	if (p != 1 || e == 0 || mlx->map.collect == 0)
 		ft_pec_errmsg();
+	ft_check_pec10(mlx);
 }
 
-//checks that the map has only allowed characters
-void	ft_check_pec10(t_mlx *mlx)
-{
-	int		i;
-
-	i = 0;
-	while (mlx->map.line[i])
-	{
-		if (mlx->map.line[i] != 'P' && mlx->map.line[i] != 'E'
-			&& mlx->map.line[i] != 'C' && mlx->map.line[i] != '1'
-			&& mlx->map.line[i] != '0')
-			ft_map_errmsg();
-		i++;
-	}
-}
-
+//check the size and if the wall is composed by 1s
 void	ft_check_sizenwall(t_mlx *mlx)
 {
 	int	i;
@@ -98,9 +100,10 @@ void	ft_check_sizenwall(t_mlx *mlx)
 		else
 			ft_wall_errmsg();
 	}
+	ft_check_pec(mlx);
 }
 
-// free(map->line);free somewhere map->line
+//tranform the file in a char array
 int	ft_get_map(t_mlx *mlx, char *argv)
 {
 	char	*line;
@@ -123,9 +126,8 @@ int	ft_get_map(t_mlx *mlx, char *argv)
 			free(line);
 		}
 	}
+	close(fd);
 	ft_check_extension(argv);
 	ft_check_sizenwall(mlx);
-	ft_check_pec10(mlx);
-	ft_check_pec(mlx);
-	return (1);
+	return (0);
 }

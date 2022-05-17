@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:14:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/12 12:24:57 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/17 13:29:42 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_pec_errmsg(void)
 {
-	perror("The map must contain at least 1 E, 1 C, and 1 P");
+	perror("The map must contain at least 1 E, 1 C, and only 1 P");
 	exit(1);
 }
 

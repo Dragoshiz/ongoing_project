@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:11:52 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/16 12:10:22 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/17 13:43:08 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
 SRCS =	map_utils/check_map.c \
 		map_utils/map_err_msg.c \
 		map_utils/put_img.c\
-		game_cmd/find_player.c\
+		game_cmd/engine.c\
+		game_cmd/movement.c\
 		main.c \
 
 

@@ -2,20 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(lldb) Launch",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "/Users/dimbrea/Documents/42core/ongoing_project/so_long",
-      "args": [
-        "map.ber"
-      ],
-      "stopAtEntry": true,
-      "cwd": "/Users/dimbrea/Documents/42core/ongoing_project",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "lldb"
-    },
-    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",

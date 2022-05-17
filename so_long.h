@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:19:16 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/16 17:55:40 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/17 16:50:22 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define COLLECT "srcs/turd.xpm"
 # define EXITC "srcs/c-door.xpm"
 # define EXITO "srcs/o-door.xpm"
-# define PLAYER "srcs/down-fly.xpm"
 # define ESC 53
 # define W 13
 # define A 0
@@ -34,6 +33,8 @@ typedef struct s_map
 {
 	size_t	map_width;
 	size_t	map_height;
+	char	*p_path;
+	int		steps;
 	int		player;
 	int		x;
 	int		y;
@@ -47,12 +48,19 @@ typedef struct s_mlx
 	void	*ptr;
 	void	*window;
 	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
 	t_map	map;
 }t_mlx;
+void	ft_game_over(void);
+int		ft_x(void);
+void	ft_esc(t_mlx *mlx);
+void	ft_dstroy_n_put(t_mlx *mlx);
+void	ft_mv_w(t_mlx *mlx);
+void	ft_mv_a(t_mlx *mlx);
+void	ft_mv_s(t_mlx *mlx);
+void	ft_mv_d(t_mlx *mlx);
+void	ft_put_tiles(t_mlx *mlx);
+void	ft_put_all(t_mlx *mlx);
+void	ft_put_all(t_mlx *mlx);
 void	ft_mv_w(t_mlx *mlx);
 int		ft_keypress(int key, t_mlx *mlx);
 void	ft_pec_errmsg(void);
