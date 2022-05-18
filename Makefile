@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:11:52 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/18 11:54:47 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/18 15:03:59 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 RM = rm -f
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra 
 
 AF = ar rc
 
@@ -36,18 +36,21 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 				make -C libft
+				make -C mlx
 				cp ./libft/libft.a libft_so_long.a
 				$(AF) libft_so_long.a $(OBJS)
-				$(CC) $(FLAGS) ./libft_so_long.a ./mlx/libmlx.a $(MLX) $(OBJS) -o $(NAME)
+				$(CC) $(FLAGS) ./libft_so_long.a ./mlx/libmlx.a $(MLX) $(OBJS) -g -o $(NAME)
 
 clean:
 	$(RM) $(OBJS) 
 	make clean -C libft
+	make clean -C mlx
 
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) libft_so_long.a
 	make fclean -C libft
+	make clean -C mlx
 	
 
 re: fclean all

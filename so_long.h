@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:19:16 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/17 18:14:48 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:02:57 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_mlx
 	void	*img;
 	t_map	map;
 }t_mlx;
+void	ft_err(void);
 int		ft_loop(t_mlx *mlx);
 void	ft_game_over(void);
 int		ft_x(void);
@@ -72,7 +73,7 @@ void	ft_map_errmsg(void);
 void	ft_start(t_mlx *mlx);
 void	ft_check_sizenwall(t_mlx *mlx);
 void	ft_check_pec10(t_mlx *mlx);
-int		ft_get_map(t_mlx *mlx, char *argv);
+void	ft_get_map(t_mlx *mlx, char *argv);
 int		main(int argc, char *argv[]);
 
 #endif

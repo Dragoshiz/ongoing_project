@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:14:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/18 10:58:07 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:02:47 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	ft_map_errmsg(void)
 void	ft_empty_errmsg(void)
 {
 	write(1, "Error\n", 6);
-	write(1, "Map file is empty!", 18);
+	exit(0);
+}
+
+void	ft_err(void)
+{
+	write(1, "Error opening the map", 21);
 	exit(0);
 }

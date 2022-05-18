@@ -1,2 +1,3 @@
-.vscode
-so_long.dSYM
+/.vscode
+/so_long.dSYM
+.gitignore

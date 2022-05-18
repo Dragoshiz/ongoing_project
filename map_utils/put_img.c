@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:40:29 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/18 11:24:04 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:36:23 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_put_all(t_mlx *mlx)
 		{
 			ft_put_xpm(mlx->map.line[i], mlx, x, y);
 			mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->img, x, y);
+			mlx_destroy_image(mlx->ptr, mlx->img);
 		}
 		x += 64;
 		if (x == 64 * mlx->map.map_width)
@@ -92,30 +93,25 @@ int	ft_loop(t_mlx *mlx)
 {
 	static int	i;
 
-	if (i == 21)
-		i = 0;
-	if (i == 5)
-		mlx->map.x_path = "srcs/web.xpm";
-	if (i == 10)
-		mlx->map.x_path = "srcs/web2.xpm";
-	if (i == 15)
-		mlx->map.x_path = "srcs/web3.xpm";
-	if (i == 20)
-		mlx->map.x_path = "srcs/web4.xpm";
-	i++;
 	ft_dstroy_n_put(mlx);
+	if (i == 40)
+		i = 0;
+	if (i == 10)
+		mlx->map.x_path = "srcs/web4.xpm";
+	if (i == 20)
+		mlx->map.x_path = "srcs/web3.xpm";
+	if (i == 30)
+		mlx->map.x_path = "srcs/web.xpm";
+	if (i == 39)
+		mlx->map.x_path = "srcs/web2.xpm";
+	i++;
 	return (0);
 }
 
 void	ft_start(t_mlx *mlx)
 {
-	mlx->ptr = mlx_init();
-	mlx->window = mlx_new_window(mlx->ptr, mlx->map.map_width * 64,
-			mlx->map.map_height * 64, "so_long");
-	ft_put_tiles(mlx);
-	ft_put_all(mlx);
-	mlx_hook(mlx->window, 2, (1L << 0), ft_keypress, mlx);
 	mlx_hook(mlx->window, 17, 0L, ft_x, mlx);
+	mlx_hook(mlx->window, 2, (1L << 0), ft_keypress, mlx);
 	mlx_loop_hook(mlx->ptr, &ft_loop, mlx);
 	mlx_loop(mlx->ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:06:55 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/18 11:47:46 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:36:18 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_dstroy_n_put(t_mlx *mlx)
 	while (mlx->map.line[i++])
 		if (mlx->map.line[i] == 'P')
 			mlx->map.player = i;
-	mlx_destroy_image(mlx->ptr, mlx->img);
 	ft_put_tiles(mlx);
+	mlx_destroy_image(mlx->ptr, mlx->img);
 	ft_put_all(mlx);
 	mlx_string_put(mlx->ptr, mlx->window, 10, 10, 0x0, c);
 	free(c);
@@ -39,6 +39,7 @@ void	ft_esc(t_mlx *mlx)
 		exit(0);
 	}
 	write(1, "Exited game!", 12);
+	mlx_destroy_image(mlx->ptr, mlx->img);
 	mlx_destroy_window(mlx->ptr, mlx->window);
 	exit(0);
 }

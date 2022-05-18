@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:14:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/18 11:14:15 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:01:57 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_check_extension(char *argv)
 		return ;
 	else
 	{
-		perror("Map must be with a .ber extension.");
+		write(1, "Map must be with a .ber extension.", 34);
 		exit(0);
 	}
 }
@@ -104,12 +104,14 @@ void	ft_check_sizenwall(t_mlx *mlx)
 }
 
 //tranform the file in a char array
-int	ft_get_map(t_mlx *mlx, char *argv)
+void	ft_get_map(t_mlx *mlx, char *argv)
 {
 	char	*line;
 	int		fd;
 
 	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		ft_err();
 	line = get_next_line(fd);
 	if (!line)
 		ft_empty_errmsg();
@@ -129,5 +131,4 @@ int	ft_get_map(t_mlx *mlx, char *argv)
 	close(fd);
 	ft_check_extension(argv);
 	ft_check_sizenwall(mlx);
-	return (0);
 }
