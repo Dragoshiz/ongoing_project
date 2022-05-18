@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:11:52 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/17 13:43:08 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/18 11:54:47 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(NAME): $(OBJS)
 				make -C libft
 				cp ./libft/libft.a libft_so_long.a
 				$(AF) libft_so_long.a $(OBJS)
-				$(CC) $(FLAGS) -L. ./libft_so_long.a ./mlx/libmlx.a $(MLX) $(OBJS) -o $(NAME)
+				$(CC) $(FLAGS) ./libft_so_long.a ./mlx/libmlx.a $(MLX) $(OBJS) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS) 

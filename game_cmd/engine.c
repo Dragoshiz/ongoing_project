@@ -6,13 +6,13 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:06:55 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/17 19:21:22 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 11:47:46 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//destroys img and renders it + counts steps
+//destroys img and renders it + counts steps on both display and shell
 void	ft_dstroy_n_put(t_mlx *mlx)
 {
 	int		i;
@@ -34,7 +34,10 @@ void	ft_dstroy_n_put(t_mlx *mlx)
 void	ft_esc(t_mlx *mlx)
 {
 	if (mlx->map.collect == 0)
+	{
 		write(1, "YOU WON!", 8);
+		exit(0);
+	}
 	write(1, "Exited game!", 12);
 	mlx_destroy_window(mlx->ptr, mlx->window);
 	exit(0);
@@ -59,7 +62,7 @@ void	ft_game_over(void)
 int	ft_keypress(int key, t_mlx *mlx)
 {
 	if (key == ESC)
-		ft_esc(mlx);
+		ft_x();
 	else if (key == W || key == UP)
 		ft_mv_w(mlx);
 	else if (key == A || key == LEFT)

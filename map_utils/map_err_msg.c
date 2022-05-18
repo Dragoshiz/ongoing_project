@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 12:14:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/17 13:29:42 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 10:58:07 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 
 void	ft_pec_errmsg(void)
 {
-	perror("The map must contain at least 1 E, 1 C, and only 1 P");
-	exit(1);
+	write(1, "Error\n", 6);
+	write(1, "The map must contain at least 1 E, 1 C, and only 1 P", 52);
+	exit(0);
 }
 
 void	ft_wall_errmsg(void)
 {
-	perror("Wall must be rectangular and closed by 1s");
-	exit(1);
+	write(1, "Error\n", 6);
+	write(1, "Wall must be rectangular and closed by 1s", 41);
+	exit(0);
 }
 
 void	ft_map_errmsg(void)
 {
-	perror("Wrong simbol used! Simbols allowed PEC10");
-	exit(1);
+	write(1, "Error\n", 6);
+	write(1, "Wrong simbol used! Simbols allowed PEC10X", 41);
+	exit(0);
 }
 
 void	ft_empty_errmsg(void)
 {
-	perror("Map file is empty!");
-	exit(1);
+	write(1, "Error\n", 6);
+	write(1, "Map file is empty!", 18);
+	exit(0);
 }

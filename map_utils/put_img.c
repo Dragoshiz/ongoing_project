@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 14:40:29 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/17 19:14:55 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/18 11:24:04 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_put_all(t_mlx *mlx)
 	}
 }
 
+//funct for the loop hook, it changes the enemy img path every n times
 int	ft_loop(t_mlx *mlx)
 {
 	static int	i;
@@ -96,11 +97,11 @@ int	ft_loop(t_mlx *mlx)
 	if (i == 5)
 		mlx->map.x_path = "srcs/web.xpm";
 	if (i == 10)
-		mlx->map.x_path = "srcs/web-2.xpm";
+		mlx->map.x_path = "srcs/web2.xpm";
 	if (i == 15)
-		mlx->map.x_path = "srcs/web-3.xpm";
+		mlx->map.x_path = "srcs/web3.xpm";
 	if (i == 20)
-		mlx->map.x_path = "srcs/web-4.xpm";
+		mlx->map.x_path = "srcs/web4.xpm";
 	i++;
 	ft_dstroy_n_put(mlx);
 	return (0);
