@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 14:01:58 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/21 14:11:39 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/21 14:26:16 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,11 @@ $(NAME) : $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
+	make clean -C libft
 
 fclean: clean
 	$(RM) $(NAME)
+	make fclean -C libft
 
 re: fclean all
 
