@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": true,
       "externalConsole": false,
-      "cwd": "/Users/dimbrea/Documents/42core/ongoing_project/pipex",
-      "program": "/Users/dimbrea/Documents/42core/ongoing_project/pipex/build/Debug/outDebug",
+      "cwd": "/Users/dimbrea/Documents/42core/libft",
+      "program": "/Users/dimbrea/Documents/42core/libft/build/Debug/outDebug",
       "MIMode": "gdb"
     }
   ]
