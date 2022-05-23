@@ -6,58 +6,33 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 16:29:25 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/05/21 16:33:43 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/05/23 17:53:03 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-//finds path environment var, splits by ':' and saves.
-void	ft_path(char *env[], t_vars *vars)
+//temp variable to be freed
+//function to check if command exists
+//todo: split command argument by space and pass that into this function
+char	*ft_cmnd_chk(t_vars *vars, char *argv[])
 {
 	int		i;
-	int		k;
-	int		j;
-	char	*path;
+	char	*temp;
 
 	i = 0;
-	while (env[i])
+	while (vars->paths[i])
 	{
-		if (!ft_strncmp(env[i], "PATH", 4))
-			path = ft_strdup(env[i]);
+		temp = ft_strjoin(vars->paths[i], argv[2]);
+		if (access(temp, F_OK) == 0)
+			return (temp);
+		else
+		{
+			free(temp);
+		}
 		i++;
 	}
-	i = 5;
-	vars->paths = ft_split(path, ':');
-	k = ft_strlen(vars->paths[0]);
-	j = 0;
-	while (i <= k)
-	{
-		vars->paths[0][j] = vars->paths[0][i];
-		i++;
-		j++;
-	}
-	vars->paths[0][j] = '\n';
-	free(path);
-}
-
-//checks if files exists and if readable/writeble is valid
-void	ft_exist(char *argv[])
-{
-	int	fd[2];
-
-	fd[0] = access(argv[1], R_OK);
-	fd[1] = access(argv[4], W_OK);
-	if (fd[0] < 0)
-	{
-		write(1, "First file does not exist/not readable", 38);
-		exit(0);
-	}
-	if (fd[1] < 0)
-	{
-		write(1, "Second file does not exist/not writable", 39);
-		exit(0);
-	}
+	return (NULL);
 }
 
 int	main(int argc, char *argv[], char *env[])
@@ -65,23 +40,19 @@ int	main(int argc, char *argv[], char *env[])
 	t_vars	vars;
 	int		i;
 
+	// ft_c2heck(argc, argv, env, &vars);
+	// if (pipe(vars.fd) < 0)
+	// 	ft_errmsg(0);
 	i = 0;
-	if (argc != 5)
-	{
-		write(1, "Program must have 4 arguments!", 30);
-		return (1);
-	}
-	ft_exist(argv);
-	ft_path(env, &vars);
-	// while (vars.paths[i])
-	// {
-	// 	// printf("%s\n", vars.paths[i]);
+	// if (access("/bin/wc", F_OK) == 0)
+	// 	printf("GOOD");
+	// else
+	// 	printf("BAD");
+	// while(vars.paths[i])
+	// {	
+	// 	printf("%s\n", vars.paths[i]);
 	// 	i++;
 	// }
-	while (vars.paths[i])
-	{
-		free(vars.paths[i]);
-		i++;
-	}
+	// execve("/bin/ls", arg1, NULL);
 	return (0);
 }

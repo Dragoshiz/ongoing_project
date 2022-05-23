@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dimbrea <dimbrea@student.42wolfsburg.de>   +#+  +:+       +#+         #
+#    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 16:02:04 by dimbrea           #+#    #+#              #
-#    Updated: 2022/01/16 16:02:08 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/23 15:32:39 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 

@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/21 14:01:58 by dimbrea           #+#    #+#              #
-#    Updated: 2022/05/21 14:26:16 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/05/23 15:32:55 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = pipex
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
