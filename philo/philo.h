@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 15:25:09 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/03 17:57:25 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/03 18:32:22 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ typedef struct s_var
 	int	t_toeat;
 	int	t_tosleep;
 	int	num_of_eats;
-	int	forks;
-
 }t_var;
+typedef struct s_philo
+{
+	int	l_f;
+	int	r_f;
+}t_philo;
 
 int		ft_atoi(const char *argv);
 void	ft_init_input(t_var *var, int argc, char *argv[]);
