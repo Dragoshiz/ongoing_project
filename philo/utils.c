@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/22 15:43:52 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/23 17:04:01 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,13 @@ long long	ft_time(void)
 	struct timeval	time;
 
 	return (time.tv_usec / 1000 + time.tv_sec * 1000);
+}
+
+int	ft_alloc(t_philo *philo)
+{
+	t_philo	*philos;
+
+	if(philos = malloc(sizeof(t_philo) * philo->vars->philos))
+		return (0);
+	
 }
