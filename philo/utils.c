@@ -6,83 +6,58 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/23 17:04:01 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/24 18:09:30 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-//modified atoi function so that arguments get assigned to variables
-int	philo_atoi(char *str, int *var)
+//allcating mem to each philo and alloc mem for forks MUST BE FREED!!!!
+int	ft_alloc(t_vars *vars)
 {
-	int		i;
-	long	res;
-
-	i = 0;
-	res = 0;
-	if (str[i] == '-')
+	vars->philo = malloc(sizeof(t_philo) * vars->num_philo);
+	if (!vars->philo)
 		return (1);
-	if (str[i] == '+')
-		i++;
-	while (str[i])
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			res = res * 10 + (str[i] - '0');
-			i++;
-			if (res > INT_MAX || res == 0)
-				return (1);
-		}
-		else
-			return (1);
-	}
-	*var = (int)res;
+	vars->forks = malloc(sizeof(pthread_mutex_t) \
+	* vars->num_philo);
 	return (0);
 }
 
-//writes an error message to stderr
-void	errmsg(char *str)
+//assigning IDs and forks to each philosopher accordingly
+void	ft_assign_idnforks(t_vars *vars)
+{
+	int	i;
+	int	id;
+
+	i = 0;
+	id = 1;
+	while (i < vars->num_philo)
+	{
+		vars->philo[i].id = id;
+		vars->philo[i].l_fork = i;
+		if (i == vars->num_philo - 1)
+			vars->philo[i].r_fork = 0;
+		else
+			vars->philo[i].r_fork = i + 1;
+		id++;
+		i++;
+	}
+}
+
+void	routine(void)
+{
+	
+}
+
+int	ft_start_threads(t_vars *vars)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (i < vars->num_philo)
 	{
-		write(2, &str[i], 1);
+		pthread_create(&vars->philo[i].thread, NULL, &routine, NULL);
 		i++;
 	}
-	write(2, "\n", 1);
-}
-
-//function to check arguments using a modified atoi 
-int	check_args(char *argv[], t_vars *vars)
-{
-	if (philo_atoi(argv[1], &vars->philos)
-		|| philo_atoi(argv[2], &vars->tm_to_die)
-		|| philo_atoi(argv[3], &vars->tm_to_eat)
-		|| philo_atoi(argv[4], &vars->tm_to_sleep))
-		return (1);
-	if (argv[5] && philo_atoi(argv[5], &vars->x_to_eat))
-		return (1);
-	return (0);
-}
-
-//it returns the time I return tvsec*1000 + tv_usec/1000 because
-//if I use only tv_usec/1000 when i call it the second time,
-//if it passed one milisecond it gets resetted so if i do
-//end - start, end will be smaller than start, end the result will be negative
-long long	ft_time(void)
-{
-	struct timeval	time;
-
-	return (time.tv_usec / 1000 + time.tv_sec * 1000);
-}
-
-int	ft_alloc(t_philo *philo)
-{
-	t_philo	*philos;
-
-	if(philos = malloc(sizeof(t_philo) * philo->vars->philos))
-		return (0);
 	
 }

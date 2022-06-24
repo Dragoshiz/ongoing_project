@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/23 16:55:31 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/24 17:47:20 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,27 @@
 
 typedef struct s_philo
 {
-	t_vars					*vars;
 	int						id;
-	pthread_mutex_t			*l_fork;
-	pthread_mutex_t			*r_fork;
+	int						l_fork;
+	int						r_fork;
 	pthread_t				thread;
 }t_philo;
 typedef struct s_vars
 {
-	long long				start;
-	int						philos;
-	int						tm_to_die;
-	int						tm_to_eat;
-	int						tm_to_sleep;
-	int						x_to_eat;
-	pthread_mutex_t			forks;
+	t_philo				*philo;
+	long long			start;
+	int					num_philo;
+	int					tm_to_die;
+	int					tm_to_eat;
+	int					tm_to_sleep;
+	int					x_to_eat;
+	pthread_mutex_t		*forks;
 }t_vars;
 int			philo_atoi(char *str, int *var);
 void		errmsg(char *str);
 int			check_args(char *argv[], t_vars *vars);
 long long	ft_time(void);
+int			ft_alloc(t_vars *vars);
+void		ft_assign_idnforks(t_vars *vars);
+
 #endif
