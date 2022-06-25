@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:46:28 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/24 17:46:56 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/25 19:36:44 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ int	check_args(char *argv[], t_vars *vars)
 		|| philo_atoi(argv[3], &vars->tm_to_eat)
 		|| philo_atoi(argv[4], &vars->tm_to_sleep))
 		return (1);
+	vars->is_end = 0;
 	if (argv[5] && philo_atoi(argv[5], &vars->x_to_eat))
+	{
+		vars->is_end = 0;
 		return (1);
+	}
 	return (0);
 }
 

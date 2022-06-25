@@ -2,15 +2,28 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug",
+      "program": "/Users/dimbrea/Documents/ongoing_project/philo/a.out",
+      "args": [
+        "5",
+        "800",
+        "200",
+        "200"
+      ],
+      "cwd": "/Users/dimbrea/Documents/ongoing_project/philo"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": ["5", "800", "200", "200"],
+      "args": [],
       "stopAtEntry": true,
       "externalConsole": false,
       "cwd": "/Users/dimbrea/Documents/ongoing_project/philo",
-      "program": "/Users/dimbrea/Documents/ongoing_project/philo/a.out",
-      "MIMode": "lldb"
+      "program": "/Users/dimbrea/Documents/ongoing_project/philo/build/Debug/outDebug",
+      "MIMode": "gdb"
     }
   ]
 }
