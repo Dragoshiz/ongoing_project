@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:46:28 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/25 19:36:44 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/26 16:20:03 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ long long	ft_time(void)
 {
 	struct timeval	time;
 
-	return (time.tv_usec / 1000 + time.tv_sec * 1000);
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }

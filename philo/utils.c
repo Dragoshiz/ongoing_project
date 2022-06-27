@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/25 19:39:54 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/27 11:43:40 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,25 @@ void	ft_assign_idnforks(t_vars *vars)
 
 void	ft_printmsg(t_philo *philo, char *msg)
 {
-	long long	now;
-
-	now = ft_time();
-	pthread_mutex_lock(&philo->vars->dead);
 	pthread_mutex_lock(&philo->vars->print);
 	if (!philo->is_dead && !philo->vars->is_end)
 	{
-		printf("%.005lld %d %s\n", ft_time(), philo->id, msg);
+		printf("%05llu %d %s\n", (ft_time() - philo->vars->start), philo->id, msg);
 	}
-	pthread_mutex_unlock(&philo->vars->dead);
 	pthread_mutex_unlock(&philo->vars->print);
+}
+void	ft_is_dead(t_philo *philo)
+{
+	if (philo->is_dead)
+	{
+		ft_printmsg(philo, "is dead");
+		philo->vars->is_end = 1;
+	}
+}
+
+void	ft_think(t_philo *philo)
+{
+	ft_printmsg(philo, "is thinking");
 }
 
 void	ft_sleep(t_philo *philo)
@@ -85,38 +93,66 @@ void	ft_sleep(t_philo *philo)
 	ft_printmsg(philo, "is sleeping");
 	while (1)
 	{
+		usleep(100);
 		now = ft_time();
 		diff = now - start;
 		if (diff >= philo->vars->tm_to_sleep)
 			break ;
 	}
+	philo->has_eaten = 0;
+	ft_think(philo);
 }
 
-void	ft_think(t_philo *philo)
+void	ft_eat(t_philo *philo)
 {
-	ft_printmsg(philo, "is thinking");
+	long long	start;
+	long long	now;
+	long long	diff;
+
+	start = ft_time();
+	pthread_mutex_lock(&philo->vars->forks[philo->l_fork]);
+	pthread_mutex_lock(&philo->vars->forks[philo->r_fork]);
+	ft_printmsg(philo, "has taken a fork");
+	ft_printmsg(philo, "has taken a fork");
+	// printf("\n%lld", (philo->last_meal + philo->vars->tm_to_eat) - philo->vars->start );
+	// if ((philo->last_meal + philo->vars->tm_to_eat) - philo->vars->start  >= philo->vars->start + philo->vars->tm_to_die)
+	// {
+	// 	ft_printmsg(philo, "died");
+	// 	philo->vars->is_end = 1;
+	// 	return ;
+	// }
+	philo->last_meal = ft_time();
+	ft_printmsg(philo, "is eating");
+	while (1 && !philo->is_dead)
+	{
+		usleep(100);
+		now = ft_time();
+		diff = now - start;
+		if (diff >= philo->vars->tm_to_eat)
+		{
+			pthread_mutex_unlock(&philo->vars->forks[philo->l_fork]);
+			pthread_mutex_unlock(&philo->vars->forks[philo->r_fork]);
+			philo->has_eaten = 1;
+			break ;
+		}
+	}
+	usleep(200);
 }
-
-// void	ft_eat(t_philo *philo)
-// {
-// 	long long	start;
-// 	long long	now;
-// 	long long	diff;
-
-// 	start = ft_time;
-// 	if (philo->id % 2 == 0)
-// }
 
 void	*routine(t_philo *philo)
 {
 	if (philo->vars->num_philo == 1)
 		printf("Here is only one let it think and die");
-// 	while (!philo->vars->is_end)
-// 	{
-		
-// 	}
-	ft_sleep(philo);
-	// ft_think(philo);
+	if(philo->id % 2 == 1)
+		usleep(500);
+	while (!philo->vars->is_end)
+	{
+		ft_eat(philo);
+		if (philo->has_eaten && !philo->vars->is_end)
+			ft_sleep(philo);
+		else
+			ft_think(philo);
+	}
 	return (NULL);
 }
 
@@ -125,6 +161,7 @@ int	ft_thread(t_vars *vars)
 	int	i;
 
 	i = 0;
+	vars->start = ft_time();
 	while (i < vars->num_philo)
 	{
 		if (pthread_create(&vars->philo[i].thread, NULL, \
