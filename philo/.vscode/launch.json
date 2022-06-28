@@ -8,9 +8,9 @@
       "program": "/Users/dimbrea/Documents/ongoing_project/philo/a.out",
       "args": [
         "5",
-        "800",
+        "310",
         "200",
-        "200"
+        "100"
       ],
       "cwd": "/Users/dimbrea/Documents/ongoing_project/philo"
     },

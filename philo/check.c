@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:46:28 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/26 16:20:03 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/28 16:09:57 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	check_args(char *argv[], t_vars *vars)
 		|| philo_atoi(argv[3], &vars->tm_to_eat)
 		|| philo_atoi(argv[4], &vars->tm_to_sleep))
 		return (1);
+	vars->all_meals = -1;
 	vars->is_end = 0;
 	if (argv[5] && philo_atoi(argv[5], &vars->x_to_eat))
 	{

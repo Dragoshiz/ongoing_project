@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/27 11:43:40 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/28 12:28:30 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_alloc(t_vars *vars)
 		return (1);
 	pthread_mutex_init(&vars->print, NULL);
 	pthread_mutex_init(&vars->dead, NULL);
+	pthread_mutex_init(&vars->last_meal, NULL);
 	while (i < vars->num_philo)
 	{
 		pthread_mutex_init(&vars->forks[i], NULL);
@@ -46,7 +47,6 @@ void	ft_assign_idnforks(t_vars *vars)
 	while (i < vars->num_philo)
 	{
 		vars->philo[i].vars = vars;
-		vars->philo[i].last_meal = ft_time();
 		vars->philo[i].id = id;
 		vars->philo[i].l_fork = i;
 		vars->philo[i].has_eaten = 0;
@@ -60,102 +60,6 @@ void	ft_assign_idnforks(t_vars *vars)
 	}
 }
 
-void	ft_printmsg(t_philo *philo, char *msg)
-{
-	pthread_mutex_lock(&philo->vars->print);
-	if (!philo->is_dead && !philo->vars->is_end)
-	{
-		printf("%05llu %d %s\n", (ft_time() - philo->vars->start), philo->id, msg);
-	}
-	pthread_mutex_unlock(&philo->vars->print);
-}
-void	ft_is_dead(t_philo *philo)
-{
-	if (philo->is_dead)
-	{
-		ft_printmsg(philo, "is dead");
-		philo->vars->is_end = 1;
-	}
-}
-
-void	ft_think(t_philo *philo)
-{
-	ft_printmsg(philo, "is thinking");
-}
-
-void	ft_sleep(t_philo *philo)
-{
-	long long	start;
-	long long	now;
-	long long	diff;
-
-	start = ft_time();
-	ft_printmsg(philo, "is sleeping");
-	while (1)
-	{
-		usleep(100);
-		now = ft_time();
-		diff = now - start;
-		if (diff >= philo->vars->tm_to_sleep)
-			break ;
-	}
-	philo->has_eaten = 0;
-	ft_think(philo);
-}
-
-void	ft_eat(t_philo *philo)
-{
-	long long	start;
-	long long	now;
-	long long	diff;
-
-	start = ft_time();
-	pthread_mutex_lock(&philo->vars->forks[philo->l_fork]);
-	pthread_mutex_lock(&philo->vars->forks[philo->r_fork]);
-	ft_printmsg(philo, "has taken a fork");
-	ft_printmsg(philo, "has taken a fork");
-	// printf("\n%lld", (philo->last_meal + philo->vars->tm_to_eat) - philo->vars->start );
-	// if ((philo->last_meal + philo->vars->tm_to_eat) - philo->vars->start  >= philo->vars->start + philo->vars->tm_to_die)
-	// {
-	// 	ft_printmsg(philo, "died");
-	// 	philo->vars->is_end = 1;
-	// 	return ;
-	// }
-	philo->last_meal = ft_time();
-	ft_printmsg(philo, "is eating");
-	while (1 && !philo->is_dead)
-	{
-		usleep(100);
-		now = ft_time();
-		diff = now - start;
-		if (diff >= philo->vars->tm_to_eat)
-		{
-			pthread_mutex_unlock(&philo->vars->forks[philo->l_fork]);
-			pthread_mutex_unlock(&philo->vars->forks[philo->r_fork]);
-			philo->has_eaten = 1;
-			break ;
-		}
-	}
-	usleep(200);
-}
-
-void	*routine(t_philo *philo)
-{
-	if (philo->vars->num_philo == 1)
-		printf("Here is only one let it think and die");
-	if(philo->id % 2 == 1)
-		usleep(500);
-	while (!philo->vars->is_end)
-	{
-		ft_eat(philo);
-		if (philo->has_eaten && !philo->vars->is_end)
-			ft_sleep(philo);
-		else
-			ft_think(philo);
-	}
-	return (NULL);
-}
-
 int	ft_thread(t_vars *vars)
 {
 	int	i;
@@ -167,8 +71,10 @@ int	ft_thread(t_vars *vars)
 		if (pthread_create(&vars->philo[i].thread, NULL, \
 		(void *(*)(void *))routine, &vars->philo[i]))
 			return (1);
+		vars->philo[i].last_meal = ft_time();
 		i++;
 	}
+	ft_is_dead(vars->philo);
 	i = 0;
 	while (i < vars->num_philo)
 	{
