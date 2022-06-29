@@ -6,11 +6,28 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/28 12:28:30 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/29 19:51:38 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_kill_them_all(t_philo *philo)
+{
+	int	i;
+
+	pthread_mutex_destroy(&philo->vars->last_meal);
+	pthread_mutex_destroy(&philo->vars->print);
+	pthread_mutex_destroy(&philo->vars->dead);
+	i = 0;
+	while (i < philo->vars->num_philo)
+	{
+		pthread_mutex_destroy(&philo->vars->forks[i]);
+		i++;
+	}
+	free(philo);
+	free(philo->vars->forks);
+}
 
 //allcating mem to each philo and alloc mem for forks MUST BE FREED!!!!
 int	ft_alloc(t_vars *vars)
@@ -27,7 +44,7 @@ int	ft_alloc(t_vars *vars)
 		return (1);
 	pthread_mutex_init(&vars->print, NULL);
 	pthread_mutex_init(&vars->dead, NULL);
-	pthread_mutex_init(&vars->last_meal, NULL);
+pthread_mutex_init(&vars->last_meal, NULL);
 	while (i < vars->num_philo)
 	{
 		pthread_mutex_init(&vars->forks[i], NULL);
@@ -60,21 +77,33 @@ void	ft_assign_idnforks(t_vars *vars)
 	}
 }
 
+//it returns the time I return tvsec*1000 + tv_usec/1000 because
+//if I use only tv_usec/1000 when i call it the second time,
+//if it passed one milisecond it gets resetted so if i do
+//end - start, end will be smaller than start, end the result will be negative
+long long	ft_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
 int	ft_thread(t_vars *vars)
 {
 	int	i;
 
-	i = 0;
+	vars->all_ate = 0;
 	vars->start = ft_time();
+	i = 0;
 	while (i < vars->num_philo)
 	{
+		vars->philo[i].last_meal = ft_time();
 		if (pthread_create(&vars->philo[i].thread, NULL, \
 		(void *(*)(void *))routine, &vars->philo[i]))
 			return (1);
-		vars->philo[i].last_meal = ft_time();
 		i++;
 	}
-	ft_is_dead(vars->philo);
 	i = 0;
 	while (i < vars->num_philo)
 	{
@@ -84,3 +113,4 @@ int	ft_thread(t_vars *vars)
 	}
 	return (0);
 }
+

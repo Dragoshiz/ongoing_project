@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:41 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/26 19:21:42 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/29 19:43:11 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int	main(int argc, char *argv[])
 		errmsg("Allocation did not succeed");
 	ft_assign_idnforks(&vars);
 	ft_thread(&vars);
+	ft_kill_them_all(vars.philo);
 	return (0);
 }
