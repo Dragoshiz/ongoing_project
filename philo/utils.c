@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/29 19:51:38 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/30 19:18:51 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_kill_them_all(t_philo *philo)
 {
 	int	i;
 
-	pthread_mutex_destroy(&philo->vars->last_meal);
+	pthread_mutex_destroy(&philo->vars->sleep);
 	pthread_mutex_destroy(&philo->vars->print);
 	pthread_mutex_destroy(&philo->vars->dead);
 	i = 0;
@@ -44,7 +44,7 @@ int	ft_alloc(t_vars *vars)
 		return (1);
 	pthread_mutex_init(&vars->print, NULL);
 	pthread_mutex_init(&vars->dead, NULL);
-pthread_mutex_init(&vars->last_meal, NULL);
+	pthread_mutex_init(&vars->sleep, NULL);
 	while (i < vars->num_philo)
 	{
 		pthread_mutex_init(&vars->forks[i], NULL);
@@ -104,6 +104,7 @@ int	ft_thread(t_vars *vars)
 			return (1);
 		i++;
 	}
+	ft_is_dead(vars);
 	i = 0;
 	while (i < vars->num_philo)
 	{
@@ -113,4 +114,3 @@ int	ft_thread(t_vars *vars)
 	}
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/29 19:42:18 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/06/30 19:19:06 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_vars
 {
 	t_philo				*philo;
 	long long			start;
+	int					i;
 	int					num_philo;
 	int					tm_to_die;
 	int					tm_to_eat;
@@ -44,7 +45,7 @@ typedef struct s_vars
 	int					x_to_eat;
 	int					all_ate;
 	int					is_end;
-	pthread_mutex_t		last_meal;
+	pthread_mutex_t		sleep;
 	pthread_mutex_t		print;
 	pthread_mutex_t		dead;
 	pthread_mutex_t		*forks;
@@ -58,9 +59,12 @@ int			ft_alloc(t_vars *vars);
 void		ft_assign_idnforks(t_vars *vars);
 int			ft_thread(t_vars *philo);
 void		ft_printmsg(t_philo *philo, char *msg);
+void		ft_check_n_print(t_philo *philo, char *msg);
 // void		ft_is_dead(t_philo *philo);
 // void		ft_sleep(t_philo *philo);
 // void		ft_eat(t_philo *philo);
 void		*routine(t_philo *philo);
+// void		ft_is_end(t_philo *philo);
 void		ft_kill_them_all(t_philo *philo);
+void		ft_is_dead(t_vars *vars);
 #endif
