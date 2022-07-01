@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:41 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/30 17:50:05 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 18:57:46 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 	}
 	if (check_args(argv, &vars))
 		errmsg("One of the arguments is not valid!");
-	if (ft_alloc(&vars))//freeee!!
+	if (ft_alloc(&vars))
 		errmsg("Allocation did not succeed");
 	ft_assign_idnforks(&vars);
 	ft_thread(&vars);

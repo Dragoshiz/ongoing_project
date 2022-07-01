@@ -6,12 +6,13 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:47:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 18:51:01 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 19:26:11 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+//checks if philosophers have died 
 void	ft_is_dead(t_vars *vars)
 {
 	int	i;
@@ -25,53 +26,41 @@ void	ft_is_dead(t_vars *vars)
 			return ;
 		ft_no_space(vars);
 		if (vars->philo[i].meals == vars->x_to_eat)
-			vars->philo[i].has_eaten = 1;
-		pthread_mutex_unlock(&vars->meal);
+			vars->philo[i].is_full = 1;
+		pthread_mutex_unlock(&vars->x_meal);
 		if ((ft_time() - vars->philo[i].last_meal >= vars->tm_to_die))
 		{
 			printf("%05lld %d is dead\n", ft_time()
 				- vars->start, vars->philo[i].id);
 			vars->is_end = 1;
-			pthread_mutex_unlock(&vars->sleep);
-			pthread_mutex_unlock(&vars->dead);
+			ft_no_space2(vars);
 			break ;
 		}
-		pthread_mutex_unlock(&vars->sleep);
-		pthread_mutex_unlock(&vars->dead);
+		ft_no_space2(vars);
 		i++;
 	}
 }
 
-void	ft_check_n_print(t_philo *philo, char *msg)
-{
-	pthread_mutex_lock(&philo->vars->dead);
-	if (!philo->vars->is_end)
-	{
-		pthread_mutex_lock(&philo->vars->print);
-		printf("%05lld %d %s\n", ft_time() - philo->vars->start, philo->id, msg);
-		pthread_mutex_unlock(&philo->vars->print);
-	}
-	pthread_mutex_unlock(&philo->vars->dead);
-}
-
+//function to make philosophers eat
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->vars->forks[philo->l_fork]);
 	ft_check_n_print(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->vars->forks[philo->r_fork]);
 	ft_check_n_print(philo, "has taken a fork");
-	pthread_mutex_lock(&philo->vars->sleep);
+	pthread_mutex_lock(&philo->vars->l_meal);
 	philo->last_meal = ft_time();
-	pthread_mutex_unlock(&philo->vars->sleep);
+	pthread_mutex_unlock(&philo->vars->l_meal);
 	ft_check_n_print(philo, "is eating");
-	pthread_mutex_lock(&philo->vars->meal);
+	pthread_mutex_lock(&philo->vars->x_meal);
 	philo->meals++;
-	pthread_mutex_unlock(&philo->vars->meal);
+	pthread_mutex_unlock(&philo->vars->x_meal);
 	usleep(philo->vars->tm_to_eat * 1000);
 	pthread_mutex_unlock(&philo->vars->forks[philo->l_fork]);
 	pthread_mutex_unlock(&philo->vars->forks[philo->r_fork]);
 }
 
+//fucntion to make philosophers sleep
 void	ft_sleep(t_philo *philo)
 {
 	ft_check_n_print(philo, "is sleeping");
@@ -79,24 +68,25 @@ void	ft_sleep(t_philo *philo)
 	ft_check_n_print(philo, "is thinking");
 }
 
+//function used in pthread_create
 void	*routine(t_philo *philo)
 {
 	if (philo->vars->num_philo == 1)
 		usleep(philo->vars->tm_to_die * 1000);
 	if (philo->id % 2 == 0)
 		usleep(philo->vars->tm_to_eat * 1000);
-	pthread_mutex_lock(&philo->vars->sleep);
+	pthread_mutex_lock(&philo->vars->l_meal);
 	philo->last_meal = ft_time();
-	pthread_mutex_unlock(&philo->vars->sleep);
+	pthread_mutex_unlock(&philo->vars->l_meal);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->vars->sleep);
+		pthread_mutex_lock(&philo->vars->dead);
 		if (philo->vars->is_end)
 		{
-			pthread_mutex_unlock(&philo->vars->sleep);
+			pthread_mutex_unlock(&philo->vars->dead);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->vars->sleep);
+		pthread_mutex_unlock(&philo->vars->dead);
 		ft_eat(philo);
 		ft_sleep(philo);
 	}

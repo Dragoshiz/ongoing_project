@@ -6,19 +6,21 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 18:51:17 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 19:21:50 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+//function for destroying mutexes and freeing allocated memory
 void	ft_kill_them_all(t_philo *philo)
 {
 	int	i;
 
-	pthread_mutex_destroy(&philo->vars->sleep);
+	pthread_mutex_destroy(&philo->vars->l_meal);
 	pthread_mutex_destroy(&philo->vars->print);
 	pthread_mutex_destroy(&philo->vars->dead);
+	pthread_mutex_destroy(&philo->vars->x_meal);
 	i = 0;
 	while (i < philo->vars->num_philo)
 	{
@@ -44,8 +46,8 @@ int	ft_alloc(t_vars *vars)
 		return (1);
 	pthread_mutex_init(&vars->print, NULL);
 	pthread_mutex_init(&vars->dead, NULL);
-	pthread_mutex_init(&vars->sleep, NULL);
-	pthread_mutex_init(&vars->meal, NULL);
+	pthread_mutex_init(&vars->l_meal, NULL);
+	pthread_mutex_init(&vars->x_meal, NULL);
 	while (i < vars->num_philo)
 	{
 		pthread_mutex_init(&vars->forks[i], NULL);
@@ -67,7 +69,7 @@ void	ft_assign_idnforks(t_vars *vars)
 		vars->philo[i].vars = vars;
 		vars->philo[i].id = id;
 		vars->philo[i].l_fork = i;
-		vars->philo[i].has_eaten = 0;
+		vars->philo[i].is_full = 0;
 		if (i == vars->num_philo - 1)
 			vars->philo[i].r_fork = 0;
 		else
@@ -77,18 +79,8 @@ void	ft_assign_idnforks(t_vars *vars)
 	}
 }
 
-//it returns the time I return tvsec*1000 + tv_usec/1000 because
-//if I use only tv_usec/1000 when i call it the second time,
-//if it passed one milisecond it gets resetted so if i do
-//end - start, end will be smaller than start, end the result will be negative
-long long	ft_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
+//function to create threads in a loop, also checking with ft_is_dead()
+//that runs in an infinite loop if a philosopher died
 int	ft_thread(t_vars *vars)
 {
 	int	i;

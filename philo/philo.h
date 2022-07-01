@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 18:51:20 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 19:18:24 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_philo
 	int			id;
 	int			l_fork;
 	int			r_fork;
-	int			has_eaten;
+	int			is_full;
 	int			meals;
 	long long	last_meal;
 	pthread_t	thread;
@@ -36,7 +36,6 @@ typedef struct s_vars
 {
 	t_philo				*philo;
 	long long			start;
-	int					i;
 	int					num_philo;
 	int					tm_to_die;
 	int					tm_to_eat;
@@ -44,10 +43,10 @@ typedef struct s_vars
 	int					x_to_eat;
 	int					all_ate;
 	int					is_end;
-	pthread_mutex_t		sleep;
+	pthread_mutex_t		l_meal;
 	pthread_mutex_t		print;
 	pthread_mutex_t		dead;
-	pthread_mutex_t		meal;
+	pthread_mutex_t		x_meal;
 	pthread_mutex_t		*forks;
 }t_vars;
 
@@ -69,4 +68,5 @@ void		ft_kill_them_all(t_philo *philo);
 void		ft_is_dead(t_vars *vars);
 int			ft_all_ate(t_vars *vars);
 void		ft_no_space(t_vars *vars);
+void		ft_no_space2(t_vars *vars);
 #endif

@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:46:28 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 18:51:02 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 19:06:33 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,63 +67,4 @@ int	check_args(char *argv[], t_vars *vars)
 		return (1);
 	vars->is_end = 0;
 	return (0);
-}
-
-// int		ft_all_ate(t_vars *vars)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < vars->num_philo)
-// 	{
-// 		if (!vars->philo[i].has_eaten)
-// 		{
-// 			// pthread_mutex_lock(&vars->meal);
-// 			if (vars->philo[i].meals >= vars->x_to_eat)
-// 			{
-// 				vars->all_ate++;
-// 				vars->philo[i].has_eaten = 1;
-// 			}
-// 			// pthread_mutex_unlock(&vars->meal);
-// 		}
-// 		// printf("%d ID %d has eaten, %d MEALS %d X TO EAT %d ALL ATE\n", vars->philo[i].id, vars->philo[i].has_eaten, vars->philo[i].meals, vars->x_to_eat, vars->all_ate);
-// 		if (vars->all_ate == vars->num_philo)
-// 		{
-// 			vars->is_end = 1;
-// 			// printf("%05lld all ate\n", ft_time() - vars->start);
-// 			pthread_mutex_unlock(&vars->sleep);
-// 			pthread_mutex_unlock(&vars->dead);
-// 			return (1);
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-int	ft_all_ate(t_vars *vars)
-{
-	int	i;
-
-	i = 0;
-	while (i < vars->num_philo)
-	{
-		if (vars->philo[i].has_eaten)
-			vars->all_ate++;
-		if (vars->all_ate == vars->x_to_eat)
-		{
-			pthread_mutex_lock(&vars->dead);
-			vars->is_end = 1;
-			pthread_mutex_unlock(&vars->dead);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	ft_no_space(t_vars *vars)
-{
-	pthread_mutex_lock(&vars->dead);
-	pthread_mutex_lock(&vars->sleep);
-	pthread_mutex_lock(&vars->meal);
 }
