@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:47:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 16:05:57 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 18:51:01 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ void	ft_is_dead(t_vars *vars)
 	while (1)
 	{
 		if (i == vars->num_philo)
-		{	
 			i = 0;
-		}
-		pthread_mutex_lock(&vars->dead);
-		pthread_mutex_lock(&vars->sleep);
-		if (vars->x_to_eat != -1)
-			if (ft_all_ate(vars))
-				break ;
-		// printf("%d\n", i);
+		if (ft_all_ate(vars))
+			return ;
+		ft_no_space(vars);
+		if (vars->philo[i].meals == vars->x_to_eat)
+			vars->philo[i].has_eaten = 1;
+		pthread_mutex_unlock(&vars->meal);
 		if ((ft_time() - vars->philo[i].last_meal >= vars->tm_to_die))
 		{
 			printf("%05lld %d is dead\n", ft_time()
@@ -66,9 +64,9 @@ void	ft_eat(t_philo *philo)
 	philo->last_meal = ft_time();
 	pthread_mutex_unlock(&philo->vars->sleep);
 	ft_check_n_print(philo, "is eating");
-	pthread_mutex_lock(&philo->vars->sleep);
+	pthread_mutex_lock(&philo->vars->meal);
 	philo->meals++;
-	pthread_mutex_unlock(&philo->vars->sleep);
+	pthread_mutex_unlock(&philo->vars->meal);
 	usleep(philo->vars->tm_to_eat * 1000);
 	pthread_mutex_unlock(&philo->vars->forks[philo->l_fork]);
 	pthread_mutex_unlock(&philo->vars->forks[philo->r_fork]);

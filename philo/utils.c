@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 15:15:09 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 18:51:17 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	ft_assign_idnforks(t_vars *vars)
 		vars->philo[i].id = id;
 		vars->philo[i].l_fork = i;
 		vars->philo[i].has_eaten = 0;
-		vars->philo->is_dead = 0;
 		if (i == vars->num_philo - 1)
 			vars->philo[i].r_fork = 0;
 		else

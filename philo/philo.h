@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 15:16:59 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 18:51:20 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_philo
 	int			l_fork;
 	int			r_fork;
 	int			has_eaten;
-	int			is_dead;
 	int			meals;
 	long long	last_meal;
 	pthread_t	thread;
@@ -68,5 +67,6 @@ void		*routine(t_philo *philo);
 // void		ft_is_end(t_philo *philo);
 void		ft_kill_them_all(t_philo *philo);
 void		ft_is_dead(t_vars *vars);
-int	ft_all_ate(t_vars *vars);
+int			ft_all_ate(t_vars *vars);
+void		ft_no_space(t_vars *vars);
 #endif
