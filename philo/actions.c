@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:47:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 20:27:00 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 20:35:25 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ void	ft_is_dead(t_vars *vars)
 	}
 }
 
+//function to make philosophers eat
+void	ft_eat(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->vars->forks[philo->l_fork]);
+	ft_check_n_print(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->vars->forks[philo->r_fork]);
+	ft_check_n_print(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->vars->l_meal);
+	philo->last_meal = ft_time();
+	pthread_mutex_unlock(&philo->vars->l_meal);
+	ft_check_n_print(philo, "is eating");
+	pthread_mutex_lock(&philo->vars->x_meal);
+	philo->meals++;
+	pthread_mutex_unlock(&philo->vars->x_meal);
+	usleep(philo->vars->tm_to_eat * 1000);
+	pthread_mutex_unlock(&philo->vars->forks[philo->l_fork]);
+	pthread_mutex_unlock(&philo->vars->forks[philo->r_fork]);
+}
+
 //fucntion to make philosophers sleep
 void	ft_sleep(t_philo *philo)
 {
@@ -49,39 +68,13 @@ void	ft_sleep(t_philo *philo)
 	ft_check_n_print(philo, "is thinking");
 }
 
-//function to make philosophers eat
-void	ft_eat(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->vars->forks[philo->l_fork]);
-	ft_check_n_print(philo, "has taken a fork");
-	pthread_mutex_lock(&philo->vars->forks[philo->r_fork]);
-	ft_check_n_print(philo, "has taken a fork");
-	ft_check_n_print(philo, "is eating");
-	pthread_mutex_lock(&philo->vars->x_meal);
-	philo->meals++;
-	pthread_mutex_unlock(&philo->vars->x_meal);
-	usleep(philo->vars->tm_to_eat * 1000);
-	pthread_mutex_lock(&philo->vars->l_meal);
-	philo->last_meal = ft_time();
-	pthread_mutex_unlock(&philo->vars->l_meal);
-	pthread_mutex_unlock(&philo->vars->forks[philo->l_fork]);
-	pthread_mutex_unlock(&philo->vars->forks[philo->r_fork]);
-	ft_sleep(philo);
-}
-
 //function used in pthread_create
 void	*routine(t_philo *philo)
 {
-	if (philo->vars->num_philo % 2 == 1)
-	{
-		if (philo->id % 3 != 0)
-			usleep(philo->vars->tm_to_eat * 1000 * (philo->id % 3) - 10000);
-	}
-	else
-	{
-		if (philo->id % 2 == 0)
-			usleep(philo->vars->tm_to_eat * 1000 - 10000);
-	}
+	if (philo->vars->num_philo == 1)
+		usleep(philo->vars->tm_to_die * 1000);
+	if (philo->id % 2 == 0)
+		usleep(philo->vars->tm_to_eat * 1000);
 	pthread_mutex_lock(&philo->vars->l_meal);
 	philo->last_meal = ft_time();
 	pthread_mutex_unlock(&philo->vars->l_meal);
@@ -95,6 +88,7 @@ void	*routine(t_philo *philo)
 		}
 		pthread_mutex_unlock(&philo->vars->dead);
 		ft_eat(philo);
+		ft_sleep(philo);
 	}
 	return (NULL);
 }
