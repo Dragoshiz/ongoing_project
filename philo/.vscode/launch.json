@@ -21,8 +21,8 @@
       "args": [],
       "stopAtEntry": true,
       "externalConsole": false,
-      "cwd": "/Users/dimbrea/Documents/ongoing_project/philo",
-      "program": "/Users/dimbrea/Documents/ongoing_project/philo/build/Debug/outDebug",
+      "cwd": "/Users/dimbrea/Documents/philooooo/philo",
+      "program": "/Users/dimbrea/Documents/philooooo/philo/build/Debug/outDebug",
       "MIMode": "gdb"
     }
   ]

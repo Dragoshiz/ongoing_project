@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/30 19:18:51 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 15:15:09 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ft_alloc(t_vars *vars)
 	pthread_mutex_init(&vars->print, NULL);
 	pthread_mutex_init(&vars->dead, NULL);
 	pthread_mutex_init(&vars->sleep, NULL);
+	pthread_mutex_init(&vars->meal, NULL);
 	while (i < vars->num_philo)
 	{
 		pthread_mutex_init(&vars->forks[i], NULL);

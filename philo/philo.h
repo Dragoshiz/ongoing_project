@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/06/30 19:19:06 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 15:16:59 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_vars
 	pthread_mutex_t		sleep;
 	pthread_mutex_t		print;
 	pthread_mutex_t		dead;
+	pthread_mutex_t		meal;
 	pthread_mutex_t		*forks;
 }t_vars;
 
@@ -67,4 +68,5 @@ void		*routine(t_philo *philo);
 // void		ft_is_end(t_philo *philo);
 void		ft_kill_them_all(t_philo *philo);
 void		ft_is_dead(t_vars *vars);
+int	ft_all_ate(t_vars *vars);
 #endif
