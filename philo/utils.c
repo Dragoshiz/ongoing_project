@@ -6,29 +6,32 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:08:51 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 19:21:50 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/01 20:16:50 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //function for destroying mutexes and freeing allocated memory
-void	ft_kill_them_all(t_philo *philo)
+int	ft_kill_them_all(t_philo *philo)
 {
 	int	i;
 
-	pthread_mutex_destroy(&philo->vars->l_meal);
-	pthread_mutex_destroy(&philo->vars->print);
-	pthread_mutex_destroy(&philo->vars->dead);
-	pthread_mutex_destroy(&philo->vars->x_meal);
+	if (pthread_mutex_destroy(&philo->vars->l_meal) != 0
+		|| pthread_mutex_destroy(&philo->vars->print) != 0
+		|| pthread_mutex_destroy(&philo->vars->dead) != 0
+		|| pthread_mutex_destroy(&philo->vars->x_meal) != 0)
+		return (1);
 	i = 0;
 	while (i < philo->vars->num_philo)
 	{
-		pthread_mutex_destroy(&philo->vars->forks[i]);
+		if (pthread_mutex_destroy(&philo->vars->forks[i]) != 0)
+			return (1);
 		i++;
 	}
 	free(philo);
 	free(philo->vars->forks);
+	return (0);
 }
 
 //allcating mem to each philo and alloc mem for forks MUST BE FREED!!!!
@@ -44,13 +47,15 @@ int	ft_alloc(t_vars *vars)
 	* vars->num_philo);
 	if (!vars->forks)
 		return (1);
-	pthread_mutex_init(&vars->print, NULL);
-	pthread_mutex_init(&vars->dead, NULL);
-	pthread_mutex_init(&vars->l_meal, NULL);
-	pthread_mutex_init(&vars->x_meal, NULL);
+	if (pthread_mutex_init(&vars->print, NULL) != 0
+		|| pthread_mutex_init(&vars->dead, NULL) != 0
+		|| pthread_mutex_init(&vars->l_meal, NULL) != 0
+		|| pthread_mutex_init(&vars->x_meal, NULL) != 0)
+		return (1);
 	while (i < vars->num_philo)
 	{
-		pthread_mutex_init(&vars->forks[i], NULL);
+		if (pthread_mutex_init(&vars->forks[i], NULL) != 0)
+			return (1);
 		i++;
 	}
 	return (0);
