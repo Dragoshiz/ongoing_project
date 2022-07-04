@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:47:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 20:35:25 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/04 17:03:26 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ void	ft_is_dead(t_vars *vars)
 	}
 }
 
+//eating action to run until time_to_eat time;
+void	ft_eat_action(t_philo *philo)
+{
+	long long	now;
+	long long	diff;
+	long long	start;
+
+	start = ft_time();
+	while (1)
+	{
+		usleep(100);
+		now = ft_time();
+		diff = now - start;
+		if (diff >= philo->vars->tm_to_eat)
+			break ;
+	}
+}
+
 //function to make philosophers eat
 void	ft_eat(t_philo *philo)
 {
@@ -51,11 +69,11 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->vars->l_meal);
 	philo->last_meal = ft_time();
 	pthread_mutex_unlock(&philo->vars->l_meal);
+	ft_eat_action(philo);
 	ft_check_n_print(philo, "is eating");
 	pthread_mutex_lock(&philo->vars->x_meal);
 	philo->meals++;
 	pthread_mutex_unlock(&philo->vars->x_meal);
-	usleep(philo->vars->tm_to_eat * 1000);
 	pthread_mutex_unlock(&philo->vars->forks[philo->l_fork]);
 	pthread_mutex_unlock(&philo->vars->forks[philo->r_fork]);
 }
@@ -63,8 +81,20 @@ void	ft_eat(t_philo *philo)
 //fucntion to make philosophers sleep
 void	ft_sleep(t_philo *philo)
 {
+	long long	now;
+	long long	diff;
+	long long	start;
+
 	ft_check_n_print(philo, "is sleeping");
-	usleep(philo->vars->tm_to_sleep * 1000);
+	start = ft_time();
+	while (1)
+	{
+		usleep(100);
+		now = ft_time();
+		diff = now - start;
+		if (diff >= philo->vars->tm_to_sleep)
+			break ;
+	}
 	ft_check_n_print(philo, "is thinking");
 }
 

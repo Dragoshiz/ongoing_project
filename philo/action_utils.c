@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 19:02:39 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/01 19:24:40 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/04 17:17:02 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,25 @@ void	ft_check_n_print(t_philo *philo, char *msg)
 }
 
 //checks wether philos have ate x times_to_eat if all of them at that much
-// program ends
+//program ends
 int	ft_all_ate(t_vars *vars)
 {
 	int	i;
 
 	i = 0;
+	vars->all_ate = 0;
 	while (i < vars->num_philo)
 	{
 		if (vars->philo[i].is_full)
-			vars->all_ate++;
-		if (vars->all_ate == vars->x_to_eat)
+				vars->all_ate++;
+		if (vars->all_ate == vars->num_philo && vars->x_to_eat > 1)
+		{
+			pthread_mutex_lock(&vars->dead);
+			vars->is_end = 1;
+			pthread_mutex_unlock(&vars->dead);
+			return (1);
+		}
+		if (vars->all_ate == vars->num_philo && vars->x_to_eat == 1)
 		{
 			pthread_mutex_lock(&vars->dead);
 			vars->is_end = 1;

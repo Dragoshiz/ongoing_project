@@ -2,19 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "lldb",
-      "request": "launch",
-      "name": "Debug",
-      "program": "/Users/dimbrea/Documents/ongoing_project/philo/a.out",
-      "args": [
-        "5",
-        "310",
-        "200",
-        "100"
-      ],
-      "cwd": "/Users/dimbrea/Documents/ongoing_project/philo"
-    },
-    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
