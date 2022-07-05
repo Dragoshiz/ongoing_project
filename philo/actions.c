@@ -6,7 +6,7 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:47:31 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/07/04 17:03:26 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/07/05 17:18:41 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->vars->l_meal);
 	philo->last_meal = ft_time();
 	pthread_mutex_unlock(&philo->vars->l_meal);
-	ft_eat_action(philo);
 	ft_check_n_print(philo, "is eating");
+	ft_eat_action(philo);
 	pthread_mutex_lock(&philo->vars->x_meal);
 	philo->meals++;
 	pthread_mutex_unlock(&philo->vars->x_meal);

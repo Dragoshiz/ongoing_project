@@ -6,7 +6,7 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 12:08:58 by dimbrea           #+#    #+#              #
-#    Updated: 2022/07/04 11:47:50 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/07/05 11:23:20 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = gcc
 
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror -pthread
-# -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -pthread -g
+#-fsanitize=thread -g
 
 SRCS = \
 action_utils.c \
