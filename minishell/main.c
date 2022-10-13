@@ -6,12 +6,13 @@
 /*   By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 10:23:30 by dimbrea           #+#    #+#             */
-/*   Updated: 2022/10/12 17:00:08 by dimbrea          ###   ########.fr       */
+/*   Updated: 2022/10/13 18:17:14 by dimbrea          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//function that splits and stores the PATH variable into struct vars->paths
 void	ft_get_path(t_vars *vars, char *env[])
 {
 	char	*path;
@@ -23,7 +24,7 @@ void	ft_get_path(t_vars *vars, char *env[])
 	while (env[i])
 	{
 		if (!ft_strncmp(env[i], "PATH", 4))
-			path = env[i];
+			path = ft_strdup(env[i]);//free path
 		i++;
 	}
 	vars->paths = ft_split(path, ':');
@@ -36,20 +37,27 @@ void	ft_get_path(t_vars *vars, char *env[])
 		i++;
 		j++;
 	}
+	vars->paths[0][j] = '\0';
+	free(path);
 }
 
+// // FREE THE VARS->LINE, VARS->ARGS
+// void	ft_readline(t_vars *vars)
+// {
+// 	int	i;
+
+// 	vars->line = readline("minish$ ");
+// 	add_history(vars->line);
+// 	vars->args = ft_split(vars->line, '|');
+// 	i = 0;
+// 	while (vars->args[i])
+// 		printf("%s\n", vars->args[i++]);
+// }
 
 int	main(int argc, char *argv[], char *env[])
 {
 	t_vars	vars;
 
-	if (argc > 1)
-	{
-		write(1, "ERROR", 5);
-		exit(0);
-	}
 	ft_get_path(&vars, env);
-	vars.args = readline("minishell$ ");
-	printf("%s", vars.args);
 	return (0);
 }

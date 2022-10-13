@@ -6,14 +6,14 @@
 #    By: dimbrea <dimbrea@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 16:27:48 by dimbrea           #+#    #+#              #
-#    Updated: 2022/10/12 16:55:27 by dimbrea          ###   ########.fr        #
+#    Updated: 2022/10/13 11:52:47 by dimbrea          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = gcc
-
+#remember to use the CFLAGS at the end!!
 # CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
